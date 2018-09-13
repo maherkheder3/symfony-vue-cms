@@ -13,6 +13,7 @@
         "ezyang/htmlpurifier": "^4.9",
         "sensio/framework-extra-bundle": "^5.0",
         "sensiolabs/security-checker": "^4.1",
+        "symfony/apache-pack": "^1.0",
         "symfony/asset": "^4.1",
         "symfony/expression-language": "^4.1",
         "symfony/flex": "^1.0",
