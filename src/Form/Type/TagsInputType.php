@@ -57,6 +57,10 @@ class TagsInputType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
+//        dump($view);
+//        dump($form);
+//        dump($options);
+//        die();
         $view->vars['tags'] = $this->tags->findAll();
     }
 

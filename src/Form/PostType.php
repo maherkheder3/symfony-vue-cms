@@ -12,6 +12,7 @@
 namespace App\Form;
 
 use App\Entity\Post;
+use App\Form\Type\SactionType;
 use App\Form\Type\DateTimePickerType;
 use App\Form\Type\TagsInputType;
 use Symfony\Component\Form\AbstractType;
@@ -43,9 +44,9 @@ class PostType extends AbstractType
         // $builder->add('title', null, ['required' => false, ...]);
 
         $builder
-            ->add('title', null, [
+            ->add('title', SactionType::class, [
                 'attr' => ['autofocus' => true],
-                'label' => 'label.title',
+                'label' => 'label.title' . " s",
             ])
             ->add('summary', TextareaType::class, [
                 'help' => 'Summaries can\'t contain Markdown or HTML contents; only plain text.',
@@ -56,10 +57,10 @@ class PostType extends AbstractType
                 'help' => 'Use Markdown to format the blog post contents. HTML is allowed too.',
                 'label' => 'label.content',
             ])
-            ->add('publishedAt', DateTimePickerType::class, [
-                'label' => 'label.published_at',
-                'help' => 'Set the date in the future to schedule the blog post publication.',
-            ])
+//            ->add('publishedAt', DateTimePickerType::class, [
+//                'label' => 'label.published_at',
+//                'help' => 'Set the date in the future to schedule the blog post publication.',
+//            ])
             ->add('tags', TagsInputType::class, [
                 'label' => 'label.tags',
                 'required' => false,
