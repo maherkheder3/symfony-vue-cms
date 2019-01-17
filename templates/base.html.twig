@@ -87,6 +87,8 @@
             </header>
         {% endblock %}
 
+        <div id="app"></div>
+
         <div class="container body-container">
             {% block body %}
                 <div class="row">
@@ -136,8 +138,8 @@
         {% endblock %}
 
         {% block javascripts %}
-            <script src="{{ asset('build/manifest.js') }}"></script>
-            <script src="{{ asset('build/js/common.js') }}"></script>
+            {#<script src="{{ asset('build/manifest.js') }}"></script>#}
+            {#<script src="{{ asset('build/js/common.js') }}"></script>#}
             <script src="{{ asset('build/js/app.js') }}"></script>
         {% endblock %}
 

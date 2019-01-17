@@ -10,3 +10,12 @@ import './highlight.js';
 
 // Creates links to the Symfony documentation
 import './doclinks.js';
+
+// vue loader
+import Vue from 'vue';
+import App from './vue/App';
+
+new Vue({
+    template: '<App/>',
+    components: { App },
+}).$mount('#app');
