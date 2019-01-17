@@ -122,7 +122,6 @@ class AppFixtures extends Fixture
             'bincididunt',
             'blabore',
             'bvoluptate',
-            'bdolore',
             'bpacriatur',
             'blocrem',
             'bipcsum',
@@ -139,9 +138,6 @@ class AppFixtures extends Fixture
             'baddcipiscing',
             'bidnccididunt',
             'bldacbocdre',
-            'bvdocluptate',
-            'bddoclore',
-            'bpdacriatur',
         ];
     }
 

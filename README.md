@@ -1,9 +1,3 @@
-Symfony Demo Application
-========================
-
-The "Symfony Demo Application" is a reference application created to show how
-to develop Symfony applications following the recommended best practices.
-
 Requirements
 ------------
 
@@ -11,14 +5,29 @@ Requirements
   * PDO-SQLite PHP extension enabled;
   * and the [usual Symfony application requirements][1].
 
-Installation
-------------
 
-Execute this command to install the project:
+Install project first time
+========================
+
+Download files with Git
 
 ```bash
-$ composer create-project symfony/symfony-demo
+git clone git@github.com:maherkheder3/symfony-vue-cms.git
+cd symfony-vue-cms
+
+# install all libleres
+composer install
+
+# create database if you donot have one ( see .env file Important to configuration)
+php bin/console doctrine:database:create
+
+# crate Migrations (must the databse is Empty)
+php bin/console doctrine:migrations:migrate
+
+# to import the data from AppFixtures "admin password in this file"
+php bin/console doctrine:fixture:load   
 ```
+
 
 Usage
 -----
@@ -28,12 +37,8 @@ command to run the built-in web server and access the application in your
 browser at <http://localhost:8000>:
 
 ```bash
-$ cd symfony-demo/
 $ php bin/console server:run
 ```
-
-Alternatively, you can [configure a fully-featured web server][2] like Nginx
-or Apache to run the application.
 
 Tests
 -----
@@ -41,9 +46,51 @@ Tests
 Execute this command to run tests:
 
 ```bash
-$ cd symfony-demo/
 $ ./vendor/bin/simple-phpunit
 ```
 
-[1]: https://symfony.com/doc/current/reference/requirements.html
-[2]: https://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html
+Backend
+========================
+every codes to need in Backend
+
+To test the Controllers : [contollers list](http://127.0.0.1:8001/en/login)
+
+
+```bash
+# create Controller
+bin/console make:crud Course
+
+# crate Migrations (must the databse is Empty)
+php bin/console doctrine:migrations:migrate
+
+# import the data from AppFixtures
+php bin/console doctrine:fixture:load  
+```
+
+FrontEnd
+========================
+every codes to need in FrontEnd
+
+```bash
+# rebild styles files
+yarn run encore dev
+yarn run encore dev --watch
+```
+
+More Options
+========================
+Every options to need to development in Backed & Froned 
+
+```bash
+# Important , clear cache ...
+bin/console cache:clear
+
+```
+
+
+Create a table
+======================
+
+```bash
+
+```
