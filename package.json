@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@symfony/webpack-encore": "^0.22.4",
+    "axios": "^0.18.0",
     "bloodhound-js": "^1.2.1",
     "bootstrap-sass": "^3.3.7",
     "bootstrap-tagsinput": "^0.7.1",
@@ -15,9 +16,11 @@
     "sass-loader": "^7.1.0",
     "typeahead.js": "^0.11.1",
     "vue": "^2.5.22",
+    "vue-axios": "^2.1.4",
     "vue-loader": "^15.5.1",
     "vue-router": "^3.0.2",
     "vue-template-compiler": "^2.5.22",
+    "vuex": "^3.1.0",
     "webpack-notifier": "^1.6.0"
   },
   "scripts": {
@@ -26,5 +29,8 @@
     "watch": "./node_modules/.bin/encore dev --watch",
     "build": "./node_modules/.bin/encore production",
     "hot": "./node_modules/.bin/encore dev-server --http --port 8081 --hot"
+  },
+  "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.11"
   }
 }
