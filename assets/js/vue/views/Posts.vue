@@ -4,14 +4,16 @@
             <h1>Posts</h1>
         </div>
 
-        <div class="row col">
+        <div class="row col" v-if="canCreatePost">
             <form>
                 <div class="form-row">
                     <div class="col-8">
-                        <input v-model="message" type="text" class="form-control">
+                        <input v-model="post.title" type="text" class="form-control" name="title">
+                        <input v-model="post.summary" type="text" class="form-control" name="summary">
+                        <input v-model="post.content" type="text" class="form-control" name="content">
                     </div>
                     <div class="col-4">
-                        <button @click="createPost()" :disabled="message.length === 0 || isLoading" type="button" class="btn btn-primary">Create</button>
+                        <button @click="createPost()" :disabled="post.title.length === 0 || isLoading" type="button" class="btn btn-primary">Create</button>
                     </div>
                 </div>
             </form>
@@ -31,15 +33,16 @@
             No posts!
         </div>
 
-        <div v-else v-for="post in posts" class="row col">
-            <post :message="post.message"></post>
+        <div v-else class="row">
+            <div v-for="post in posts" class="col-lg-3">
+                <post :message="post"></post>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import Post from '../components/Post';
-    import axios from 'axios';
 
     export default {
         name: 'posts',
@@ -48,7 +51,11 @@
         },
         data () {
             return {
-                message: '',
+                post: {
+                    title: "",
+                    summary: "",
+                    content: ""
+                },
             };
         },
         created () {
@@ -70,11 +77,14 @@
             posts () {
                 return this.$store.getters['post/posts'];
             },
+            canCreatePost () {
+                return this.$store.getters['security/hasRole']('USER');
+            }
         },
         methods: {
             createPost () {
-                this.$store.dispatch('post/createPost', this.$data.message)
-                    .then(() => this.$data.message = '')
+                this.$store.dispatch('post/createPost', this.$data.post)
+                    .then(() => this.$data.post = '')
             },
         },
     }

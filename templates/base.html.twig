@@ -94,7 +94,7 @@
             </header>
         {% endblock %}
 
-        <div id="app"></div>
+        <div id="app" data-is-authenticated="{{ isAuthenticated|default }}" data-roles="{{ roles|default }}"></div>
 
         <div class="container body-container">
             {% block body %}

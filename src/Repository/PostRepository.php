@@ -36,10 +36,10 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    public function findLatest(int $page = 1, Tag $tag = null): Pagerfanta
+    public function findLatest(int $page = 1, Tag $tag = null)
     {
         $qb = $this->createQueryBuilder('p')
-            ->addSelect('a', 't')
+//            ->addSelect('a', 't')
             ->innerJoin('p.author', 'a')
             ->leftJoin('p.tags', 't')
             ->where('p.publishedAt <= :now')
@@ -51,10 +51,13 @@ class PostRepository extends ServiceEntityRepository
                 ->setParameter('tag', $tag);
         }
 
-        return $this->createPaginator($qb->getQuery(), $page);
+        $query = $qb->getQuery();
+        $query->setHydrationMode(Query::HYDRATE_ARRAY);
+//          return $qb->getQuery();
+        return $this->createPaginator($query, $page);
     }
 
-    private function createPaginator(Query $query, int $page): Pagerfanta
+    public function createPaginator(Query $query, int $page): Pagerfanta
     {
         $paginator = new Pagerfanta(new DoctrineORMAdapter($query));
         $paginator->setMaxPerPage(Post::NUM_ITEMS);

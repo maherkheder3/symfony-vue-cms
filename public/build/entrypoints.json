@@ -2,32 +2,32 @@
   "entrypoints": {
     "js/app": {
       "js": [
-        "/build/js/app.js"
+        "http://localhost:8081/build/js/app.js"
       ]
     },
     "js/login": {
       "js": [
-        "/build/js/login.js"
+        "http://localhost:8081/build/js/login.js"
       ]
     },
     "js/admin": {
       "js": [
-        "/build/js/admin.js"
+        "http://localhost:8081/build/js/admin.js"
       ]
     },
     "js/search": {
       "js": [
-        "/build/js/search.js"
+        "http://localhost:8081/build/js/search.js"
       ]
     },
     "css/app": {
       "css": [
-        "/build/css/app.css"
+        "http://localhost:8081/build/css/app.css"
       ]
     },
     "css/admin": {
       "css": [
-        "/build/css/admin.css"
+        "http://localhost:8081/build/css/admin.css"
       ]
     }
   }

@@ -231,4 +231,9 @@ class Post
     {
         return $this->tags;
     }
+
+    public function __toString()
+    {
+        return $this.$this->title;
+    }
 }

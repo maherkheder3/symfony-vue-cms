@@ -44,6 +44,8 @@ class HomeController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        return $this->render('Home/index.html.twig', []);
+        $isAuthenticated = "false";
+        $roles = "USER";
+        return $this->render('Home/index.html.twig', [ "isAuthenticated" => json_encode($isAuthenticated), "roles" => json_encode($roles)]);
     }
 }
