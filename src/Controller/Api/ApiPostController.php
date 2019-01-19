@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Repository\TagRepository;
+use App\Repository\UserRepository;
 use App\Service\PostService;
 use App\Utils\Slugger;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -25,71 +26,95 @@ final class ApiPostController extends AbstractController
 
     /** @var PostService */
     private $postService;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
     /**
      * ApiPostController constructor.
      * @param SerializerInterface $serializer
      * @param PostService $postService
      */
-    public function __construct(SerializerInterface $serializer, PostService $postService)
+    public function __construct(SerializerInterface $serializer, PostService $postService,
+                                UserRepository $userRepository)
     {
         $this->serializer = $serializer;
         $this->postService = $postService;
+        $this->userRepository = $userRepository;
     }
+
+//    /**
+//     * @Rest\Post("/api/post/create", name="createPost")
+//     * @param Request $request
+//     * @return JsonResponse
+//     */
+//    public function createAction(Request $request): JsonResponse
+//    {
+//        $message = $request->request->get('message');
+//        $postEntity = $this->postService->createPost($message);
+//        $data = $this->serializer->serialize($postEntity, 'json');
+//
+//        return new JsonResponse($data, 200, [], true);
+//    }
+
+
 
     /**
      * @Rest\Post("/api/post/create", name="createPost")
      * @param Request $request
      * @return JsonResponse
      */
-    public function createAction(Request $request): JsonResponse
+    public function create(Request $request)
     {
-        $message = $request->request->get('message');
-        $postEntity = $this->postService->createPost($message);
-        $data = $this->serializer->serialize($postEntity, 'json');
-
-        return new JsonResponse($data, 200, [], true);
-    }
-
-
-
-    /**
-     * @Rest\Get("/api/post/create", name="getAllPosts")
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function create($request)
-    {
+        $data = json_decode($request->getContent(), true);
+        $data = $data["message"];
         $post = new Post();
+        $post->setTitle($data["title"]);
+        $post->setSummary($data["summary"]);
+        $post->setContent($data["content"]);
 //        $post->setAuthor($this->getUser());
 
-        // See https://symfony.com/doc/current/book/forms.html#submitting-forms-with-multiple-buttons
-        $form = $this->createForm(PostType::class, $post)
-            ->add('saveAndCreateNew', SubmitType::class);
+        /** @App\Entity\User $user */
+        $user = $this->userRepository->findOneBy([ "username" => "jane_admin"]);
+        $post->setAuthor($user);
 
-        $form->handleRequest($request);
+        // See https://symfony.com/doc/current/book/forms.html#submitting-forms-with-multiple-buttons
+//        $form = $this->createForm(PostType::class, $post)
+//            ->add('saveAndCreateNew', SubmitType::class);
+
+//        $form->handleRequest($request);
 
         // the isSubmitted() method is completely optional because the other
         // isValid() method already checks whether the form is submitted.
         // However, we explicitly add it to improve code readability.
         // See https://symfony.com/doc/current/best_practices/forms.html#handling-form-submits
-        if ($form->isSubmitted() && $form->isValid()) {
-            $post->setSlug(Slugger::slugify($post->getTitle()));
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $post->setSlug(Slugger::slugify($post->getTitle()));
+//
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($post);
+//            $em->flush();
+//
+//            // Flash messages are used to notify the user about the result of the
+//            // actions. They are deleted automatically from the session as soon
+//            // as they are accessed.
+//            // See https://symfony.com/doc/current/book/controller.html#flash-messages
+//            $this->addFlash('success', 'post.created_successfully');
+//
+//            return new JsonResponse($post, 200, [], true);
+//        }
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($post);
-            $em->flush();
+        $post->setSlug(Slugger::slugify($post->getTitle()));
 
-            // Flash messages are used to notify the user about the result of the
-            // actions. They are deleted automatically from the session as soon
-            // as they are accessed.
-            // See https://symfony.com/doc/current/book/controller.html#flash-messages
-            $this->addFlash('success', 'post.created_successfully');
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($post);
+        $em->flush();
 
-            return new JsonResponse($post, 200, [], true);
-        }
+        $serializer = $this->container->get('serializer');
+        $reports = $serializer->serialize($post, 'json');
 
-        return new JsonResponse($post, 200, [], true);
+        return new JsonResponse($reports, 200, [], true);
     }
 
     /**
