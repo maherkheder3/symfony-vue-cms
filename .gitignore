@@ -38,3 +38,5 @@ yarn-error.log
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
 .idea/*
+
+/public/build/*
