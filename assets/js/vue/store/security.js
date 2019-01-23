@@ -43,7 +43,8 @@ export default {
         ['AUTHENTICATING_ERROR'](state, error) {
             state.isLoading = false;
             state.error = error;
-            state.isAuthenticated = false;
+            state.isAuthenticated = false
+
             state.roles = [];
         },
         ['PROVIDING_DATA_ON_REFRESH_SUCCESS'](state, payload) {

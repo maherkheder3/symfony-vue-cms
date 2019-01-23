@@ -12,7 +12,7 @@ let router = new VueRouter({
     routes: [
         { path: '/', component: Home },
         { path: '/posts', component: Posts },
-        { path: '/login', component: Login },
+        { path: '/security/login', component: Login },
         { path: '/posts', component: Posts, meta: { requiresAuth: true } },
         { path: '*', redirect: '/' }
     ],

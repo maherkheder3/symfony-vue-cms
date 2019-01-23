@@ -1,23 +1,32 @@
 <template>
     <div>
-        <div class="row col">
-            <h1>Login</h1>
-        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3-offset"></div>
+            <div class="col-md-6">
+                <div class="well">
+                    <form method="post">
+                        <fieldset>
+                            <legend><i class="fa fa-lock" aria-hidden="true"></i>Login</legend>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input v-model="login" type="text" class="form-control" id="username" name="_username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input v-model="password" type="password" class="form-control" id="password" name="_password">
+                            </div>
+                            <!--<input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>-->
+                            <!--<input type="hidden" name="_csrf_token" value=""/>-->
+                            <!--<button type="submit" class="btn btn-primary">-->
+                                <!--<i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'action.sign_in'|trans }}-->
+                            <!--</button>-->
+                            <button @click="performLogin()" :disabled="login.length === 0 || password.length === 0 ||
+                            isLoading" type="button" class="btn btn-primary">Login</button>
 
-        <div class="row col">
-            <form>
-                <div class="form-row">
-                    <div class="col-4">
-                        <input v-model="login" type="text" class="form-control">
-                    </div>
-                    <div class="col-4">
-                        <input v-model="password" type="password" class="form-control">
-                    </div>
-                    <div class="col-4">
-                        <button @click="performLogin()" :disabled="login.length === 0 || password.length === 0 || isLoading" type="button" class="btn btn-primary">Login</button>
-                    </div>
+                        </fieldset>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
 
         <div v-if="isLoading" class="row col">
@@ -73,7 +82,7 @@
                         if (typeof redirect !== 'undefined') {
                             this.$router.push({path: redirect});
                         } else {
-                            this.$router.push({path: '/home'});
+                            this.$router.push({path: '/'});
                         }
                     });
             },

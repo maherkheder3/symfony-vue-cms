@@ -1,29 +1,33 @@
 <template>
-    <div class="container">
+    <div class="body-container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <router-link class="navbar-brand" to="/home">App</router-link>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <router-link class="nav-item" tag="li" to="/home" active-class="active">
-                        <a class="nav-link">Home</a>
-                    </router-link>
-                    <router-link class="nav-item" tag="li" to="/posts" active-class="active">
-                        <a class="nav-link">Posts</a>
-                    </router-link>
-                    <li class="nav-item" v-if="isAuthenticated">
-                        <a class="nav-link" href="/api/security/logout">Logout</a>
-                    </li>
-                    <li class="nav-item" v-else="isAuthenticated">
-                        <a class="nav-link" href="/api/security/login">Login</a>
-                    </li>
-                </ul>
+            <div class="container">
+                <router-link class="navbar-brand" to="/home">App</router-link>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <router-link class="nav-item" tag="li" to="/home" active-class="active">
+                            <a class="nav-link">Home</a>
+                        </router-link>
+                        <router-link class="nav-item" tag="li" to="/posts" active-class="active">
+                            <a class="nav-link">Posts</a>
+                        </router-link>
+                        <router-link v-if="isAuthenticated" class="nav-item" tag="li" to="/security/logout" active-class="active">
+                            <a class="nav-link">Logout</a>
+                        </router-link>
+                        <router-link v-else class="nav-item" tag="li" to="/security/login" active-class="active">
+                            <a class="nav-link">Login</a>
+                        </router-link>
+                    </ul>
+                </div>
             </div>
         </nav>
 
-        <router-view></router-view>
+        <div class="container">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
@@ -43,6 +47,10 @@
                 return new Promise(() => {
                     if (err.response.status === 403) {
                         this.$router.push({path: '/login'})
+                    } else if (err.response.status === 500) {
+                        document.open();
+                        document.write(err.response.data);
+                        document.close();
                     }
                     throw err;
                 });
