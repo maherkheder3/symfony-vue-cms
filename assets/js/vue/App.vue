@@ -14,6 +14,9 @@
                         <router-link class="nav-item" tag="li" to="/posts" active-class="active">
                             <a class="nav-link">Posts</a>
                         </router-link>
+                        <router-link v-if="admin" class="nav-item" tag="li" to="/admin/backend" active-class="active">
+                            <a class="nav-link">Backend</a>
+                        </router-link>
                         <li v-if="isAuthenticated" class="nav-item" >
                             <a class="nav-link" href="/api/security/logout">Logout</a>
                         </li>
@@ -63,6 +66,9 @@
             },
             csrf_token () {
                 return this.$store.getters['security/csrf_token']
+            },
+            admin () {
+                return this.$store.getters['security/hasRole']('ROLE_ADMIN');
             }
         },
     }

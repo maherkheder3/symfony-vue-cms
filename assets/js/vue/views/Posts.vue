@@ -4,20 +4,9 @@
             <h1>Posts</h1>
         </div>
 
-        <div class="row col" v-if="canCreatePost">
-            <form>
-                <div class="form-row">
-                    <div class="col-8">
-                        <input v-model="post.title" type="text" class="form-control" name="title">
-                        <input v-model="post.summary" type="text" class="form-control" name="summary">
-                        <input v-model="post.content" type="text" class="form-control" name="content">
-                    </div>
-                    <div class="col-4">
-                        <button @click="createPost()" :disabled="post.title.length === 0 || isLoading" type="button" class="btn btn-primary">Create</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <router-link class="row col" v-if="admin" tag="div" to="/admin/post/create">
+            <a class="btn btn-primary">Create new post</a>
+        </router-link>
 
         <div v-if="isLoading" class="row col">
             <p>Loading...</p>
@@ -35,7 +24,7 @@
 
         <div v-else class="row">
             <div v-for="post in posts" class="col-lg-3">
-                <post :message="post"></post>
+                <post :post="post"></post>
             </div>
         </div>
     </div>
@@ -51,11 +40,7 @@
         },
         data () {
             return {
-                post: {
-                    title: "",
-                    summary: "",
-                    content: ""
-                },
+
             };
         },
         created () {
@@ -77,15 +62,10 @@
             posts () {
                 return this.$store.getters['post/posts'];
             },
-            canCreatePost () {
+            admin () {
                 return this.$store.getters['security/hasRole']('ROLE_ADMIN');
             }
         },
-        methods: {
-            createPost () {
-                this.$store.dispatch('post/createPost', this.$data.post)
-                    .then(() => this.$data.post = '')
-            },
-        },
+
     }
 </script>

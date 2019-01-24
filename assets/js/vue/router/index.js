@@ -4,6 +4,9 @@ import store from '../store';
 import Home from '../views/Home';
 import Login from '../views/Login';
 import Posts from '../views/Posts';
+import Backend from "../views/Admin/Backend";
+import Create from "../views/Admin/post/Create";
+import Show from "../views/post/Show";
 
 Vue.use(VueRouter);
 
@@ -11,9 +14,15 @@ let router = new VueRouter({
     mode: 'history',
     routes: [
         { path: '/', component: Home },
-        { path: '/posts', component: Posts },
         { path: '/security/login', component: Login },
+        { path: '/admin/backend', component: Backend },
+
+        // Post
+        { path: '/admin/post/create', component: Create },
+        { path: '/posts', component: Posts },
         { path: '/posts', component: Posts, meta: { requiresAuth: true } },
+        { path: '/post/show', component: Show },
+
         { path: '*', redirect: '/' }
     ],
 });

@@ -122,6 +122,11 @@ class Post
      */
     private $tags;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $image;
+
     public function __construct()
     {
         $this->publishedAt = new \DateTime();
@@ -235,6 +240,22 @@ class Post
     public function __toString()
     {
         return $this.$this->title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
     }
 
 
