@@ -13,7 +13,6 @@ let router = new VueRouter({
         { path: '/', component: Home },
         { path: '/posts', component: Posts },
         { path: '/security/login', component: Login },
-        { path: '/security/logout', component: Home },
         { path: '/posts', component: Posts, meta: { requiresAuth: true } },
         { path: '*', redirect: '/' }
     ],

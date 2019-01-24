@@ -14,10 +14,10 @@
                         <router-link class="nav-item" tag="li" to="/posts" active-class="active">
                             <a class="nav-link">Posts</a>
                         </router-link>
-                        <router-link v-if="isAuthenticated" class="nav-item" tag="li" to="/security/logout" active-class="active">
-                            <a class="nav-link">Logout</a>
-                        </router-link>
-                        <router-link v-else class="nav-item" tag="li" to="/security/login" active-class="active">
+                        <li v-if="isAuthenticated" class="nav-item" >
+                            <a class="nav-link" href="/api/security/logout">Logout</a>
+                        </li>
+                        <router-link v-else class="nav-item" tag="li" to="/security/login">
                             <a class="nav-link">Login</a>
                         </router-link>
                     </ul>
