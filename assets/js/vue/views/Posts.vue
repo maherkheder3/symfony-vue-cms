@@ -78,7 +78,7 @@
                 return this.$store.getters['post/posts'];
             },
             canCreatePost () {
-                return this.$store.getters['security/hasRole']('USER');
+                return this.$store.getters['security/hasRole']('ROLE_ADMIN');
             }
         },
         methods: {

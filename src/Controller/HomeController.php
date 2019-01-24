@@ -44,7 +44,21 @@ class HomeController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $roles = "USER";
-        return $this->render('Home/index.html.twig', [ "isAuthenticated" => 'false', "roles" => json_encode($roles)]);
+        $tokenProvider = $this->container->get('security.csrf.token_manager');
+        $token = $tokenProvider->getToken('authenticate')->getValue();
+
+        $role = "None";
+        $isAuthenticated = "false";
+        if($this->getUser()){
+            $isAuthenticated = "true";
+            if(in_array('ROLE_ADMIN', $this->getUser()->getRoles())){
+                $role = "ROLE_ADMIN";
+            }else{
+                $role = "ROLE_USER";
+            }
+        }
+
+        $data = [ "isAuthenticated" => $isAuthenticated, "roles" => json_encode($role) , "token" => $token];
+        return $this->render('Home/index.html.twig', $data);
     }
 }

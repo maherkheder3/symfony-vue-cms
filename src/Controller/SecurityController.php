@@ -26,18 +26,18 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  */
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route("/login", name="security_login")
-     */
-    public function login(AuthenticationUtils $helper): Response
-    {
-        return $this->render('security/login.html.twig', [
-            // last username entered by the user (if any)
-            'last_username' => $helper->getLastUsername(),
-            // last authentication error (if any)
-            'error' => $helper->getLastAuthenticationError(),
-        ]);
-    }
+//    /**
+//     * @Route("/login", name="security_login")
+//     */
+//    public function login(AuthenticationUtils $helper): Response
+//    {
+//        return $this->render('security/login.html.twig', [
+//            // last username entered by the user (if any)
+//            'last_username' => $helper->getLastUsername(),
+//            // last authentication error (if any)
+//            'error' => $helper->getLastAuthenticationError(),
+//        ]);
+//    }
 
     /**
      * This is the route the user can use to logout.

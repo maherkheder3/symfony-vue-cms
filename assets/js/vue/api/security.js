@@ -5,9 +5,10 @@ export default {
         return axios.post(
             '/api/security/login',
             {
-                username: login,
-                password: password,
-                csrf_token: csrf_token
+                _username: login,
+                _password: password,
+                _csrf_token: csrf_token,
+                _target_path: ""
             }
         );
     },
