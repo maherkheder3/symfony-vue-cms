@@ -40,7 +40,8 @@
             let isAuthenticated = JSON.parse(this.$parent.$el.attributes['data-is-authenticated'].value),
                 roles = JSON.parse(this.$parent.$el.attributes['data-roles'].value);
 
-            let payload = { isAuthenticated: isAuthenticated, roles: roles };
+            let csrf_token = this.$parent.$el.attributes['data-token'];
+            let payload = { isAuthenticated: isAuthenticated, roles: roles , csrf_token: csrf_token };
             this.$store.dispatch('security/onRefresh', payload);
 
             axios.interceptors.response.use(undefined, (err) => {
@@ -60,6 +61,9 @@
             isAuthenticated () {
                 return this.$store.getters['security/isAuthenticated']
             },
+            csrf_token () {
+                return this.$store.getters['security/csrf_token']
+            }
         },
     }
 </script>

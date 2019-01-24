@@ -12,7 +12,7 @@
 #        _locale: '%locale%'
 
 
-homepage_r:
+homepage:
     path: /
     controller: App\Controller\HomeController::index
     defaults:

@@ -94,27 +94,27 @@
             {#</header>#}
         {% endblock %}
 
-        <div id="app" data-is-authenticated="{{ isAuthenticated|default }}" data-roles="{{ roles|default }}"></div>
+        <div id="app" data-is-authenticated="{{ isAuthenticated|default }}" data-roles="{{ roles|default }}" data-token="{{ csrf_token('authenticate') }}"></div>
 
         <div class="xxxtt">
             {% block body %}
-                {#<div class="row">#}
-                    {#<div id="main" class="col-sm-9">#}
-                        {#{{ include('default/_flash_messages.html.twig') }}#}
+                <div class="row">
+                    <div id="main" class="col-sm-9">
+                        {{ include('default/_flash_messages.html.twig') }}
 
-                        {#{% block main %}{% endblock %}#}
-                    {#</div>#}
+                        {% block main %}{% endblock %}
+                    </div>
 
-                    {#<div id="sidebar" class="col-sm-3">#}
-                        {#{% block sidebar %}#}
-                            {#{{ render_esi(controller('Symfony\\Bundle\\FrameworkBundle\\Controller\\TemplateController::templateAction', {#}
-                                {#'template': 'blog/about.html.twig',#}
-                                {#'sharedAge': 600,#}
-                                {#'_locale': app.request.locale#}
-                            {#})) }}#}
-                        {#{% endblock %}#}
-                    {#</div>#}
-                {#</div>#}
+                    <div id="sidebar" class="col-sm-3">
+                        {% block sidebar %}
+                            {{ render_esi(controller('Symfony\\Bundle\\FrameworkBundle\\Controller\\TemplateController::templateAction', {
+                                'template': 'blog/about.html.twig',
+                                'sharedAge': 600,
+                                '_locale': app.request.locale
+                            })) }}
+                        {% endblock %}
+                    </div>
+                </div>
             {% endblock %}
         </div>
 

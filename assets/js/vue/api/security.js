@@ -1,12 +1,13 @@
 import axios from 'axios';
 
 export default {
-    login (login, password) {
+    login (login, password, csrf_token) {
         return axios.post(
-            '/api/security/logintwo',
+            '/api/security/login',
             {
                 username: login,
-                password: password
+                password: password,
+                csrf_token: csrf_token
             }
         );
     },

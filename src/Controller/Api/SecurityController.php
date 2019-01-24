@@ -37,37 +37,17 @@ class SecurityController extends AbstractController
         $this->user_repository = $user_repository;
     }
 
-//    /**
-//     * @Route("/login", name="security_login")
-//     */
-//    public function login(AuthenticationUtils $helper): Response
-//    {
-//        return $this->render('security/login.html.twig', [
-//            // last username entered by the user (if any)
-//            'last_username' => $helper->getLastUsername(),
-//            // last authentication error (if any)
-//            'error' => $helper->getLastAuthenticationError(),
-//        ]);
-//    }
-
     /**
-     * @Route("/logintwo", name="security_login_two" )
-     * @return JsonResponse
+     * @Route("/login", name="security_login")
      */
-    public function logintwo(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function login(AuthenticationUtils $helper): Response
     {
-        $user = $this->user_repository->findOneBy(["username" => "jane_admin"]);
-        dd();
-        /** @var User $user */
-        $user = $this->getUser();
-        dd($user);
-        if($user !== null){
-            $response = new JsonResponse($user->getRoles());
-            return $response;
-        }
-        else{
-            $this->user_repository->findOneBy(["username" => "", "password" => $encoder->encodePassword($user, "999666333")]);
-        }
+        return $this->render('security/login.html.twig', [
+            // last username entered by the user (if any)
+            'last_username' => $helper->getLastUsername(),
+            // last authentication error (if any)
+            'error' => $helper->getLastAuthenticationError(),
+        ]);
     }
 
     /**

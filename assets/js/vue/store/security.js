@@ -7,6 +7,7 @@ export default {
         error: null,
         isAuthenticated: false,
         roles: [],
+        csrf_token: "",
     },
     getters: {
         isLoading (state) {
@@ -26,6 +27,9 @@ export default {
                 return state.roles.indexOf(role) !== -1;
             }
         },
+        csrf_token (state){
+            return state.csrf_token;
+        }
     },
     mutations: {
         ['AUTHENTICATING'](state) {
@@ -57,12 +61,13 @@ export default {
     actions: {
         login ({commit}, payload) {
             commit('AUTHENTICATING');
-            return SecurityAPI.login(payload.login, payload.password)
+            return SecurityAPI.login(payload.login, payload.password, this.state.csrf_token)
                 .then(res => commit('AUTHENTICATING_SUCCESS', res.data))
                 .catch(err => commit('AUTHENTICATING_ERROR', err));
         },
         onRefresh({commit}, payload) {
             commit('PROVIDING_DATA_ON_REFRESH_SUCCESS', payload);
+            this.state.csrf_token = payload.csrf_token.value;
         },
     },
 }

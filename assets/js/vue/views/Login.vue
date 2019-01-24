@@ -16,7 +16,7 @@
                                 <input v-model="password" type="password" class="form-control" id="password" name="_password">
                             </div>
                             <!--<input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>-->
-                            <!--<input type="hidden" name="_csrf_token" value=""/>-->
+                            <!--<input type="hidden" name="_csrf_token" v-model="csrf_token"/>-->
                             <!--<button type="submit" class="btn btn-primary">-->
                                 <!--<i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'action.sign_in'|trans }}-->
                             <!--</button>-->
@@ -53,11 +53,12 @@
         created () {
             let redirect = this.$route.query.redirect;
 
+
             if (this.$store.getters['security/isAuthenticated']) {
                 if (typeof redirect !== 'undefined') {
                     this.$router.push({path: redirect});
                 } else {
-                    this.$router.push({path: '/home'});
+                    this.$router.push({path: '/'});
                 }
             }
         },
