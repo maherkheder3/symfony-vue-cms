@@ -1,33 +1,32 @@
 <template>
     <div>
-        <div class="row justify-content-center">
-            <div class="col-md-3-offset"></div>
-            <div class="col-md-6">
-                <div class="well">
-                    <form method="post">
-                        <fieldset>
-                            <legend><i class="fa fa-lock" aria-hidden="true"></i>Login</legend>
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input v-model="login" type="text" class="form-control" id="username" name="_username">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input v-model="password" type="password" class="form-control" id="password" name="_password">
-                            </div>
-                            <!--<input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>-->
-                            <!--<input type="hidden" name="_csrf_token" v-model="csrf_token"/>-->
-                            <!--<button type="submit" class="btn btn-primary">-->
-                                <!--<i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'action.sign_in'|trans }}-->
-                            <!--</button>-->
-                            <button @click="performLogin()" :disabled="login.length === 0 || password.length === 0 ||
-                            isLoading" type="button" class="btn btn-primary">Login</button>
+        <v-layout>
+            <v-flex>
+                <v-card style="padding:60px">
+                    <form>
+                        <v-text-field
+                                v-model="login"
+                                :counter="3"
+                                :rules="nameRules"
+                                label="Name"
+                                required
+                                id="name"
+                        ></v-text-field>
 
-                        </fieldset>
+                        <v-text-field
+                                v-model="password"
+                                :counter="3"
+                                label="Password"
+                                required
+                                :type="'password'"
+                                id="password"
+                        ></v-text-field>
+
+                        <v-btn color="warning" @click="performLogin()" :disabled="login.length === 0 || password.length === 0 || isLoading">Login</v-btn>
                     </form>
-                </div>
-            </div>
-        </div>
+                </v-card>
+            </v-flex>
+        </v-layout>
 
         <div v-if="isLoading" class="row col">
             <p>Loading...</p>
@@ -46,13 +45,16 @@
         name: 'login',
         data () {
             return {
-                login: '',
-                password: '',
+                login: 'jane_admin',
+                password: 'kitten',
+                nameRules: [
+                    v => !!v || 'Name is required',
+                    v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+                ],
             };
         },
         created () {
             let redirect = this.$route.query.redirect;
-
 
             if (this.$store.getters['security/isAuthenticated']) {
                 if (typeof redirect !== 'undefined') {
@@ -79,11 +81,14 @@
                     redirect = this.$route.query.redirect;
 
                 this.$store.dispatch('security/login', payload)
-                    .then(() => {
-                        if (typeof redirect !== 'undefined') {
-                            this.$router.push({path: redirect});
-                        } else {
-                            this.$router.push({path: '/'});
+                    .then(data => {
+                        if(this.error !== "error in login please try again" )
+                        {
+                            if (typeof redirect !== 'undefined') {
+                                this.$router.push({path: redirect});
+                            } else {
+                                this.$router.push({path: '/'});
+                            }
                         }
                     });
             },

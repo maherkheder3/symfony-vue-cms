@@ -11,6 +11,9 @@
         <input type="text" v-model.lazily.trim="multiValueList">
         <h5>{{ multiValueList }}</h5>
 
+        <td :style="styleCustom">{‌{ props.item.name }‌}</td>
+
+
         <div v-if="isLoading" class="row col">
             <p>Loading...</p>
         </div>
@@ -35,7 +38,6 @@
 
 <script>
     import Post from '../components/Post';
-
     export default {
         name: 'posts',
         components: {
@@ -43,7 +45,11 @@
         },
         data () {
             return {
-                multiValueList : ""
+                multiValueList : "",
+                styleCustom: {
+                    color: this.$vuetify.theme.primary,
+                    backgroundColor: this.$vuetify.theme.secondary
+                }
             };
         },
         created () {

@@ -7,13 +7,26 @@ import Posts from '../views/Posts';
 import Backend from "../views/Admin/Backend";
 import Create from "../views/Admin/post/Create";
 import Show from "../views/post/Show";
+import Vuetify from 'vuetify'
+import colors from 'vuetify/es5/util/colors'
+import VeeValidate from 'vee-validate'
 
+
+
+Vue.use(VeeValidate)
 Vue.use(VueRouter);
+Vue.use(Vuetify, {
+    theme:{
+        primary: colors.red.darken1, // #E53935
+        secondary: colors.red.lighten4, // #FFCDD2
+        accent: colors.indigo.base // #3F51B5
+    }
+});
 
 let router = new VueRouter({
     mode: 'history',
     routes: [
-        { path: '/', component: Home },
+        { path: '/home', component: Home },
         { path: '/security/login', component: Login },
         { path: '/admin/backend', component: Backend },
 
@@ -23,7 +36,7 @@ let router = new VueRouter({
         { path: '/posts', component: Posts, meta: { requiresAuth: true } },
         { path: '/post/show', component: Show },
 
-        { path: '*', redirect: '/' }
+        { path: '*', redirect: '/home' }
     ],
 });
 

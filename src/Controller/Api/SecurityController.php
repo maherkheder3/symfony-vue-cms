@@ -40,14 +40,25 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="security_login")
      */
-    public function login(AuthenticationUtils $helper): Response
+    public function login(Request $request): Response
     {
-        return $this->render('security/login.html.twig', [
-            // last username entered by the user (if any)
-            'last_username' => $helper->getLastUsername(),
-            // last authentication error (if any)
-            'error' => $helper->getLastAuthenticationError(),
-        ]);
+//        return $this->render('security/login.html.twig', [
+//            // last username entered by the user (if any)
+//            'last_username' => $helper->getLastUsername(),
+//            // last authentication error (if any)
+//            'error' => $helper->getLastAuthenticationError(),
+//        ]);
+        return new JsonResponse("error in login please try again");
+    }
+
+    /**
+     * @Route("/newtoken", name="security_new_token")
+     */
+    public function getNewToken(): Response
+    {
+        $tokenProvider = $this->container->get('security.csrf.token_manager');
+        $token = $tokenProvider->getToken('authenticate')->getValue();
+        return new JsonResponse($token);
     }
 
     /**

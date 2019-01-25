@@ -68,13 +68,26 @@ export default {
         login ({commit}, payload) {
             commit('AUTHENTICATING');
             return SecurityAPI.login(payload.login, payload.password, this.state.csrf_token)
-                .then(res => commit('AUTHENTICATING_SUCCESS', res.data))
+                .then(res => {
+                    if(res.data === "error in login please try again")
+                    {
+                        throw "error in login please try again";
+                    }
+                    commit('AUTHENTICATING_SUCCESS', res.data)
+                    return res.data;
+                })
                 .catch(err => commit('AUTHENTICATING_ERROR', err));
         },
         logout ({commit}, payload) {
             commit('AUTHENTICATING');
             return SecurityAPI.logout()
                 .then(res => commit('LOGOUT'))
+                .then(() => {
+                    // get new Token for the next Login
+                    SecurityAPI.newToken().then((data) =>
+                        this.state.csrf_token = data.data
+                    )
+                })
                 .catch(err => commit('AUTHENTICATING_ERROR', err));
         },
         onRefresh({commit}, payload) {

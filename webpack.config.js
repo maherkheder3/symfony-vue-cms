@@ -20,11 +20,15 @@ Encore
     .disableSingleRuntimeChunk()
 
     .addEntry('js/app', './assets/js/app.js')
-    .addEntry('js/login', './assets/js/login.js')
-    .addEntry('js/admin', './assets/js/admin.js')
-    .addEntry('js/search', './assets/js/search.js')
-    .addStyleEntry('css/app', ['./assets/scss/app.scss'])
-    .addStyleEntry('css/admin', ['./assets/scss/admin.scss'])
+    .addStyleEntry('css/app', [
+        './assets/scss/app.scss',
+        './node_modules/vuetify/dist/vuetify.min.css'
+    ])
+
+    // .addEntry('js/login', './assets/js/login.js')
+    // .addEntry('js/admin', './assets/js/admin.js')
+    // .addEntry('js/search', './assets/js/search.js')
+    // .addStyleEntry('css/admin', ['./assets/scss/admin.scss'])
     .enableVueLoader()
 ;
 

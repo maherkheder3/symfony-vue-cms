@@ -31,6 +31,11 @@
     "hot": "./node_modules/.bin/encore dev-server --http --port 8081 --hot"
   },
   "dependencies": {
-    "bootstrap-vue": "^2.0.0-rc.11"
+    "babel-polyfill": "^6.26.0",
+    "bootstrap-vue": "^2.0.0-rc.11",
+    "material-design-icons-iconfont": "^4.0.4",
+    "vee-validate": "^2.1.5",
+    "vuelidate": "^0.7.4",
+    "vuetify": "^1.4.3"
   }
 }

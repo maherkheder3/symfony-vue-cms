@@ -14,5 +14,8 @@ export default {
     },
     logout(){
         return axios.post('/api/security/logout');
+    },
+    newToken(){
+        return axios.post('/api/security/newtoken');
     }
 }
