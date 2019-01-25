@@ -38,6 +38,12 @@ export default {
             state.isAuthenticated = false;
             state.roles = [];
         },
+        ['LOGOUT'](state) {
+            state.isLoading = false;
+            state.error = null;
+            state.isAuthenticated = false;
+            state.roles = [];
+        },
         ['AUTHENTICATING_SUCCESS'](state, roles) {
             state.isLoading = false;
             state.error = null;
@@ -63,6 +69,12 @@ export default {
             commit('AUTHENTICATING');
             return SecurityAPI.login(payload.login, payload.password, this.state.csrf_token)
                 .then(res => commit('AUTHENTICATING_SUCCESS', res.data))
+                .catch(err => commit('AUTHENTICATING_ERROR', err));
+        },
+        logout ({commit}, payload) {
+            commit('AUTHENTICATING');
+            return SecurityAPI.logout()
+                .then(res => commit('LOGOUT'))
                 .catch(err => commit('AUTHENTICATING_ERROR', err));
         },
         onRefresh({commit}, payload) {

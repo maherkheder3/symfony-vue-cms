@@ -18,7 +18,7 @@
                             <a class="nav-link">Backend</a>
                         </router-link>
                         <li v-if="isAuthenticated" class="nav-item" >
-                            <a class="nav-link" href="/api/security/logout">Logout</a>
+                            <a class="nav-link" v-on:click="logoutHandeln()">Logout</a>
                         </li>
                         <router-link v-else class="nav-item" tag="li" to="/security/login">
                             <a class="nav-link">Login</a>
@@ -71,5 +71,13 @@
                 return this.$store.getters['security/hasRole']('ROLE_ADMIN');
             }
         },
+        methods:{
+            logoutHandeln(){
+                // href="/api/security/logout"
+                this.$store.dispatch('security/logout')
+                //window.localStorage.removeItem('authuser')
+                this.$router.push({path: '/'})
+            }
+        }
     }
 </script>

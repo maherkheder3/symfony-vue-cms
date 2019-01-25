@@ -47,6 +47,10 @@ i {
     color: inherit
 }
 
+li.nav-item{
+  cursor: pointer;
+}
+
 /* Utilities
    ------------------------------------------------------------------------- */
 .m-b-0 { margin-bottom: 0 }

@@ -12,4 +12,7 @@ export default {
             }
         );
     },
+    logout(){
+        return axios.post('/api/security/logout');
+    }
 }

@@ -8,6 +8,9 @@
             <a class="btn btn-primary">Create new post</a>
         </router-link>
 
+        <input type="text" v-model.lazily.trim="multiValueList">
+        <h5>{{ multiValueList }}</h5>
+
         <div v-if="isLoading" class="row col">
             <p>Loading...</p>
         </div>
@@ -22,7 +25,7 @@
             No posts!
         </div>
 
-        <div v-else class="row">
+        <div v-else class="row" >
             <div v-for="post in posts" class="col-lg-3">
                 <post :post="post"></post>
             </div>
@@ -40,7 +43,7 @@
         },
         data () {
             return {
-
+                multiValueList : ""
             };
         },
         created () {
