@@ -14,8 +14,8 @@
         <td :style="styleCustom">{‌{ props.item.name }‌}</td>
 
 
-        <div v-if="isLoading" class="row col">
-            <p>Loading...</p>
+        <div v-if="isLoading">
+            <loading></loading>
         </div>
 
         <div v-else-if="hasError" class="row col">
@@ -38,10 +38,13 @@
 
 <script>
     import Post from '../components/Post';
+    import Loading from '../components/Loading'
+
     export default {
         name: 'posts',
         components: {
-            Post
+            Post,
+            Loading
         },
         data () {
             return {

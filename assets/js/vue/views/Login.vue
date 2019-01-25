@@ -28,8 +28,8 @@
             </v-flex>
         </v-layout>
 
-        <div v-if="isLoading" class="row col">
-            <p>Loading...</p>
+        <div v-if="isLoading">
+            <loading></loading>
         </div>
 
         <div v-else-if="hasError" class="row col">
@@ -41,8 +41,12 @@
 </template>
 
 <script>
+    import Loading from '../components/Loading'
     export default {
         name: 'login',
+        components: {
+            Loading
+        },
         data () {
             return {
                 login: 'jane_admin',
