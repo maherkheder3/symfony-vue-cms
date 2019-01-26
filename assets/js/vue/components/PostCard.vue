@@ -5,16 +5,19 @@
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text">{{ post.summary.substring(0,10) }}</p>
 
-            <router-link to="/post/show">
-                <a :post="post" class="btn btn-primary">Show More</a>
-            </router-link>
+            <v-btn v-on:click="getPostDetails(post)" class="btn btn-primary">Show More</v-btn>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'post',
+        name: 'PostCard',
         props: ['post'],
+        methods:{
+            getPostDetails(post){
+                this.$router.push({ name:'PostDetails',params:{ post: post }})
+            }
+        }
     }
 </script>

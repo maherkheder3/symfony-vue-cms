@@ -30,20 +30,20 @@
 
         <div v-else class="row" >
             <div v-for="post in posts" class="col-lg-3">
-                <post :post="post"></post>
+                <postCard :post="post"></postCard>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Post from '../components/Post';
+    import PostCard from '../components/PostCard';
     import Loading from '../components/Loading'
 
     export default {
         name: 'posts',
         components: {
-            Post,
+            PostCard,
             Loading
         },
         data () {

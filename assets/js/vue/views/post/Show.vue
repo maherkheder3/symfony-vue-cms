@@ -16,14 +16,13 @@
 
 <script>
     export default {
-        name: 'showpost',
-        props: ['post'],
+        name: 'show',
         data () {
             return {
                 post: {
-                    title: "xaaa",
-                    summary: "xaaa",
-                    content: "xaaa",
+                    title: "",
+                    summary: "",
+                    content: "",
                     image: "",
                 },
             };
@@ -48,11 +47,10 @@
                 return this.$store.getters['security/hasRole']('ROLE_ADMIN');
             }
         },
-        methods:{
-            created () {
-                console.log("xx");
-                
-            },
-        }
+        created () {
+            console.log(this.$route.params.post);
+            this.post = this.$route.params.post;
+
+        },
     }
 </script>

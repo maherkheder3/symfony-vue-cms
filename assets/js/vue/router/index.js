@@ -34,7 +34,7 @@ let router = new VueRouter({
         { path: '/admin/post/create', component: Create },
         { path: '/posts', component: Posts },
         { path: '/posts', component: Posts, meta: { requiresAuth: true } },
-        { path: '/post/show', component: Show },
+        { name: 'PostDetails', path: '/post/show/:post', component: Show },
 
         { path: '*', redirect: '/home' }
     ],
