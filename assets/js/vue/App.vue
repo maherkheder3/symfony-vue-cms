@@ -98,7 +98,9 @@
 
         <v-content>
             <v-container fluid>
-                <router-view></router-view>
+                <transition>
+                    <router-view />
+                </transition>
             </v-container>
         </v-content>
         <v-footer app></v-footer>
@@ -118,7 +120,8 @@
                     { title: 'Posts', icon: 'question_answer', path: '/posts'  },
                 ],
                 mini: true,
-                right: null
+                right: null,
+                transitionName: null
             }
         },
         created () {
@@ -160,7 +163,13 @@
                 //window.localStorage.removeItem('authuser')
                 this.$router.push({path: '/'})
             }
-        }
+        },
+        // watch: {
+        //     '$route' (to, from) {
+        //         const toDepth = to.path.split('/').length
+        //         const fromDepth = from.path.split('/').length
+        //         this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+        //     }
+        // }
     }
 </script>
-

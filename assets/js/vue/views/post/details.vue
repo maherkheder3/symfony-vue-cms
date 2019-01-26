@@ -16,7 +16,7 @@
 
 <script>
     export default {
-        name: 'show',
+        name: 'Details',
         data () {
             return {
                 post: {
@@ -48,9 +48,7 @@
             }
         },
         created () {
-            console.log(this.$route.params.post);
             this.post = this.$route.params.post;
-
         },
     }
 </script>

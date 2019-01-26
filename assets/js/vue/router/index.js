@@ -6,7 +6,7 @@ import Login from '../views/Login';
 import Posts from '../views/Posts';
 import Backend from "../views/Admin/Backend";
 import Create from "../views/Admin/post/Create";
-import Show from "../views/post/Show";
+import details from "../views/post/details";
 import Vuetify from 'vuetify'
 import colors from 'vuetify/es5/util/colors'
 import VeeValidate from 'vee-validate'
@@ -34,7 +34,7 @@ let router = new VueRouter({
         { path: '/admin/post/create', component: Create },
         { path: '/posts', component: Posts },
         { path: '/posts', component: Posts, meta: { requiresAuth: true } },
-        { name: 'PostDetails', path: '/post/show/:post', component: Show },
+        { name: 'PostDetails', path: '/post/show/:post', component: details },
 
         { path: '*', redirect: '/home' }
     ],
