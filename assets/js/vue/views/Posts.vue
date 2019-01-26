@@ -1,57 +1,39 @@
 <template>
     <div>
-        <div class="row col">
-            <h1>Posts</h1>
-        </div>
-
-        <div class="text-xs-center">
-            <v-menu transition="slide-x-transition">
-                <v-btn slot="activator" dark color="primary">Slide X Transition</v-btn>
-                <v-list>
-                    <v-list-tile v-for="n in 5" :key="n" @click="">
-                        <v-list-tile-title v-text="'Item ' + n"></v-list-tile-title>
-                    </v-list-tile>
-                </v-list>
-            </v-menu>
-            <v-menu transition="slide-x-reverse-transition">
-                <v-btn slot="activator" dark color="secondary">Slide X Reverse Transition</v-btn>
-                <v-list>
-                    <v-list-tile v-for="n in 5" :key="n" @click="">
-                        <v-list-tile-title v-text="'Item ' + n"></v-list-tile-title>
-                    </v-list-tile>
-                </v-list>
-            </v-menu>
-        </div>
-
-        <router-link class="row col" v-if="admin" tag="div" to="/admin/post/create">
-            <a class="btn btn-primary">Create new post</a>
+        <router-link v-if="admin" to="/admin/post/create">
+            <v-btn color="primary">Create new post</v-btn>
         </router-link>
 
-        <input type="text" v-model.lazily.trim="multiValueList">
-        <h5>{{ multiValueList }}</h5>
+        <!--<input type="text" v-model.lazily.trim="multiValueList">-->
+        <!--<h5>{{ multiValueList }}</h5>-->
 
-        <td :style="styleCustom">{‌{ props.item.name }‌}</td>
+        <loading v-if="isLoading" />
 
-
-        <div v-if="isLoading">
-            <loading></loading>
-        </div>
-
-        <div v-else-if="hasError" class="row col">
-            <div class="alert alert-danger" role="alert">
+        <div v-else-if="hasError">
+            <v-alert :value="true"
+                    type="error">
                 {{ error }}
-            </div>
+            </v-alert>
         </div>
 
-        <div v-else-if="!hasPosts" class="row col">
-            No posts!
+        <div v-else-if="!hasPosts">
+            <v-alert :value="true" type="info" >
+                No posts!
+            </v-alert>
         </div>
 
-        <div v-else class="row" >
-            <div v-for="post in posts" class="col-lg-3">
-                <postCard :post="post"></postCard>
-            </div>
-        </div>
+        <v-container v-else justify-center fluid grid-list-md >
+
+            <v-alert :value="true" type="success">All Post : {{ posts.length }}</v-alert>
+
+            <v-layout row wrap>
+                <v-flex v-for="post in posts"
+                        v-bind="{ [`xs12 sm6 md4 lg3`]: true }"
+                        :key="getKey(post.id)" >
+                    <postCard :post="post"></postCard>
+                </v-flex>
+            </v-layout>
+        </v-container>
     </div>
 </template>
 
@@ -67,11 +49,10 @@
         },
         data () {
             return {
-                multiValueList : "",
-                styleCustom: {
-                    color: this.$vuetify.theme.primary,
-                    backgroundColor: this.$vuetify.theme.secondary
-                }
+                // styleCustom: {
+                //     color: this.$vuetify.theme.primary,
+                //     backgroundColor: this.$vuetify.theme.secondary
+                // },
             };
         },
         created () {
@@ -97,6 +78,10 @@
                 return this.$store.getters['security/hasRole']('ROLE_ADMIN');
             }
         },
-
+        methods:{
+            getKey(postId){
+                return postId * Math.random();
+            }
+        }
     }
 </script>

@@ -85,6 +85,16 @@ final class ApiPostController extends AbstractController
     }
 
     /**
+     * @Route("post/{post}", methods={"GET"}, name="post_tt_details_id")
+     * @param Post $post
+     * @return JsonResponse
+     */
+    public function postShow(Post $post)
+    {
+        return new JsonResponse($post->serializer());
+    }
+
+    /**
      * @Rest\Post("post/create", name="createPost")
      * @param Request $request
      * @return JsonResponse

@@ -86,7 +86,11 @@
 
         <v-toolbar color="red" dense fixed clipped-left app >
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-            <v-icon class="mx-3">home</v-icon>
+
+            <v-btn flat icon :to="'/home'">
+                <v-icon class="mx-3">home</v-icon>
+            </v-btn>
+
             <v-toolbar-title class="mr-5 align-center">
                 <span class="title">web-netz</span>
             </v-toolbar-title>

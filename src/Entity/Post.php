@@ -169,7 +169,7 @@ class Post
         $this->content = $content;
     }
 
-    public function getPublishedAt(): \DateTime
+    public function getPublishedAt()
     {
         return $this->publishedAt;
     }
@@ -258,5 +258,19 @@ class Post
         $this->image = $image;
     }
 
-
+    public function serializer(){
+        return json_encode([
+            "title"     => $this->title,
+            "content"   => $this->content,
+            "summary"   => $this->summary,
+            "image"     => $this->image,
+            "publishedAt"   => $this->publishedAt,
+            'author'        => $this->author->getUsername()
+        ], false);
+    }
 }
+
+
+
+
+

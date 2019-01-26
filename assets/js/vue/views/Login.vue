@@ -2,28 +2,30 @@
     <div>
         <v-layout>
             <v-flex>
-                <v-card style="padding:60px">
-                    <form>
-                        <v-text-field
-                                v-model="login"
-                                :counter="3"
-                                :rules="nameRules"
-                                label="Name"
-                                required
-                                id="name"
-                        ></v-text-field>
+                <v-card>
+                    <v-container px-4 py-4>
+                        <form>
+                            <v-text-field
+                                    v-model="login"
+                                    :counter="3"
+                                    :rules="nameRules"
+                                    label="Name"
+                                    required
+                                    id="name"
+                            ></v-text-field>
 
-                        <v-text-field
-                                v-model="password"
-                                :counter="3"
-                                label="Password"
-                                required
-                                :type="'password'"
-                                id="password"
-                        ></v-text-field>
+                            <v-text-field
+                                    v-model="password"
+                                    :counter="3"
+                                    label="Password"
+                                    required
+                                    :type="'password'"
+                                    id="password"
+                            ></v-text-field>
 
-                        <v-btn color="warning" @click="performLogin()" :disabled="login.length === 0 || password.length === 0 || isLoading">Login</v-btn>
-                    </form>
+                            <v-btn color="warning" @click="performLogin()" :disabled="login.length === 0 || password.length === 0 || isLoading">Login</v-btn>
+                        </form>
+                    </v-container>
                 </v-card>
             </v-flex>
         </v-layout>
