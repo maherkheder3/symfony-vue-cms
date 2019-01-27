@@ -28,7 +28,7 @@
             <!--</div>-->
         <!--</nav>-->
 
-        <v-navigation-drawer app fixed clipped v-model="drawer" mini-variant >
+        <v-navigation-drawer app fixed clipped v-model="drawer" >
             <v-toolbar flat class="transparent">
                 <v-list dense>
                     <v-list-tile avatar>
@@ -100,16 +100,8 @@
             <!--</v-layout>-->
         </v-toolbar>
 
-        <v-carousel v-show="justInRouter('/home')" hide-controls :style="{'margin-top':'48px'}">
-            <v-carousel-item
-                    v-for="(item,i) in carouselItems"
-                    :key="i"
-                    :src="item.src"
-            ></v-carousel-item>
-        </v-carousel>
-
         <v-content>
-            <v-container fluid>
+            <v-container fluid :style="justInRouter()">
                 <transition>
                     <router-view />
                 </transition>
@@ -170,6 +162,8 @@
                     throw err;
                 });
             });
+
+
         },
         computed: {
             isAuthenticated () {
@@ -180,7 +174,8 @@
             },
             admin () {
                 return this.$store.getters['security/hasRole']('ROLE_ADMIN');
-            }
+            },
+
         },
         methods:{
             logoutHandeln(){
@@ -189,9 +184,16 @@
                 //window.localStorage.removeItem('authuser')
                 this.$router.push({path: '/'})
             },
-            justInRouter(awdawd){
-
-                return this.$router.currentRoute.path === awdawd;
+            justInRouter(){
+                let style = {};
+                if(this.$router.currentRoute.path === "/home")
+                {
+                    style = {
+                        'margin': 0,
+                        padding: 0
+                    }
+                }
+                return style;
             }
         },
         // watch: {

@@ -3,7 +3,7 @@
         <v-layout>
             <v-flex>
                 <v-card>
-                    <v-img :style="pointer" :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 80) + 1}`"
+                    <v-img @click="getPostDetails(post)" :style="pointer" :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 80) + 1}`"
                            height="200px" >
                     </v-img>
 
@@ -14,7 +14,8 @@
                                       @click="getPostDetails(post)"></span>
 
                                 <span v-text="getDate(post.publishedAt.date)"></span>
-                                <span :style="[pointer, {'float':'right', 'padding-right': '10px'}]" v-on:click="getAuthorPage(post.author.id)" v-text="post.author.name"></span>
+                                <span :style="[pointer, {'float':'right', 'padding-right': '10px'}]"
+                                      v-on:click="getAuthorPage(post.author.id)" v-text="post.author.name"></span>
                             </v-flex>
                         </v-layout>
                     </v-container>
