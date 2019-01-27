@@ -3,24 +3,26 @@
         <v-layout>
             <v-flex>
                 <v-card>
-                    <v-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxmweLKV7RPwieiJKVga_O1yWZ4bXtKyg8YRMo9iyTY95JSsfU"
+                    <v-img :style="pointer" :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 80) + 1}`"
                            height="200px" >
                     </v-img>
 
-                    <v-container px-3 py-3 fill-height fluid pa-0 v-on:click="getPostDetails(post)">
+                    <v-container px-3 py-3 fill-height fluid pa-0>
                         <v-layout fill-height>
                             <v-flex xs12 align-end flexbox>
-                                <span :style="cardText" v-text="post.title.substring(0,30)"></span>
-                                <v-spacer></v-spacer>
+                                <span class="headline" :style="[pointer, cardText]" v-text="post.title.substring(0,18)"
+                                      @click="getPostDetails(post)"></span>
+
                                 <span v-text="getDate(post.publishedAt.date)"></span>
+                                <span :style="[pointer, {'float':'right', 'padding-right': '10px'}]" v-on:click="getAuthorPage(post.author.id)" v-text="post.author.name"></span>
                             </v-flex>
                         </v-layout>
                     </v-container>
 
-                    <v-container px-3 py-3 :style="'color: #ccc;'">
+                    <v-container px-3 py-1 :style="'color: #ccc; height: 90px; overflow:hidden'">
                         <v-layout>
                             <v-flex>
-                                <span>{{ post.summary.substring(0, 150) }}</span>
+                                <span>{{ post.summary.substring(0, 130) }}..</span>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -51,9 +53,12 @@
         data(){
             return {
                 cardText:{
-                    fontWeight: 'bold',
+                    display: 'block',
+                    height: '70px'
                 },
-
+                pointer: {
+                    'cursor': 'pointer'
+                }
             }
         },
         methods:{
@@ -69,6 +74,9 @@
                 ];
 
                 return f.getDay() + " " + monthNames[f.getMonth()] + " " + f.getFullYear()
+            },
+            getAuthorPage(authorId){
+                console.log(authorId)
             }
         }
     }

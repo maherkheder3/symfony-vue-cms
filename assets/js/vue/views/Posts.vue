@@ -17,7 +17,7 @@
         </div>
 
         <div v-else-if="!hasPosts">
-            <v-alert :value="true" type="info" >
+            <v-alert :value="true" type="info">
                 No posts!
             </v-alert>
         </div>

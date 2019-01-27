@@ -260,6 +260,7 @@ class Post
 
     public function serializer(){
         return [
+            "id"            => $this->id,
             "title"         => $this->title,
             "content"       => $this->content,
             "summary"       => $this->summary,
@@ -267,7 +268,7 @@ class Post
             "publishedAt"   => $this->publishedAt,
             'author'        => [
                 "id"        => $this->author->getId(),
-                "username"  => $this->author->getUsername()
+                "name"  => $this->author->getFullName()
             ]
         ];
     }

@@ -28,7 +28,7 @@
             <!--</div>-->
         <!--</nav>-->
 
-        <v-navigation-drawer app fixed clipped v-model="drawer" >
+        <v-navigation-drawer app fixed clipped v-model="drawer" mini-variant >
             <v-toolbar flat class="transparent">
                 <v-list dense>
                     <v-list-tile avatar>
@@ -100,6 +100,14 @@
             <!--</v-layout>-->
         </v-toolbar>
 
+        <v-carousel v-show="justInRouter('/home')" hide-controls :style="{'margin-top':'48px'}">
+            <v-carousel-item
+                    v-for="(item,i) in carouselItems"
+                    :key="i"
+                    :src="item.src"
+            ></v-carousel-item>
+        </v-carousel>
+
         <v-content>
             <v-container fluid>
                 <transition>
@@ -125,7 +133,21 @@
                 ],
                 mini: true,
                 right: null,
-                transitionName: null
+                transitionName: null,
+                carouselItems: [
+                    {
+                        src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+                    },
+                    {
+                        src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
+                    },
+                    {
+                        src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
+                    },
+                    {
+                        src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+                    }
+                ]
             }
         },
         created () {
@@ -166,6 +188,10 @@
                 this.$store.dispatch('security/logout')
                 //window.localStorage.removeItem('authuser')
                 this.$router.push({path: '/'})
+            },
+            justInRouter(awdawd){
+
+                return this.$router.currentRoute.path === awdawd;
             }
         },
         // watch: {

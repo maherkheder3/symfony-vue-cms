@@ -8,14 +8,12 @@
                 </v-card-actions>
                 <v-container v-bind="{ [`grid-list-${size}`]: true }" fluid>
                     <v-layout row wrap>
-                        <v-flex
-                                v-for="n in 9"
+                        <v-flex v-for="n in 9"
                                 :key="n"
-                                xs4
-                        >
+                                xs4 >
                             <v-card flat tile>
                                 <v-img
-                                        :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 100) + 1}`"
+                                        :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 80) + 1}`"
                                         height="150px"
                                 ></v-img>
                             </v-card>
