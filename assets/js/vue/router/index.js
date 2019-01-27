@@ -5,7 +5,7 @@ import Home from '../views/Home';
 import Login from '../views/Login';
 import Posts from '../views/Posts';
 import Backend from "../views/Admin/Backend";
-import Create from "../views/Admin/post/Create";
+import Create from "../views/post/Create";
 import details from "../views/post/details";
 import Vuetify from 'vuetify'
 import colors from 'vuetify/es5/util/colors'

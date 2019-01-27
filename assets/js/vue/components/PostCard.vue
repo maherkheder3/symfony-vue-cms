@@ -3,7 +3,8 @@
         <v-layout>
             <v-flex>
                 <v-card>
-                    <v-img @click="getPostDetails(post)" :style="pointer" :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 80) + 1}`"
+
+                    <v-img @click="getPostDetails(post)" :style="pointer" :src="getImage(post.image)"
                            height="200px" >
                     </v-img>
 
@@ -59,7 +60,7 @@
                 },
                 pointer: {
                     'cursor': 'pointer'
-                }
+                },
             }
         },
         methods:{
@@ -78,6 +79,18 @@
             },
             getAuthorPage(authorId){
                 console.log(authorId)
+            },
+            getImage(image){
+                if(image.length > 2)
+                {
+
+                    image =  "/uploads/posts/" + image;
+                }
+                else{
+                    image = "https://unsplash.it/150/300?image=" + Math.floor(Math.random() * (80) + 1)
+                }
+                this.post.image = image;
+                return image;
             }
         }
     }

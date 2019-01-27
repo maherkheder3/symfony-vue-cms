@@ -1,15 +1,18 @@
 <template>
     <div>
-        <h1>{{ post.title }}</h1>
+        <v-flex>
+            <v-card>
+                <v-container py-5>
+                    <v-img :src="this.post.image" height="400px"></v-img>
 
-        <p class="post-metadata">
-            <!--<span class="metadata"><i class="fa fa-calendar"></i> {{ // post.publishedAt|localizeddate('long', 'medium', null, 'UTC') }}</span>-->
-            <!--<span class="metadata"><i class="fa fa-user"></i> {{ post.author.fullName }}</span>-->
-        </p>
-
-        <div class="well">
-            <p class="m-b-0"><strong>Summery</strong>: {{ post.summary }}</p>
-        </div>
+                    <v-container px-0>
+                        <span class="display-3 font-weight-black" v-text="this.post.title"></span>
+                    </v-container>
+                    <span  class="headline d-block" v-text="this.post.summary"></span>
+                    <span class="mt-5 d-block" v-text="this.post.content"></span>
+                </v-container>
+            </v-card>
+        </v-flex>
     </div>
 </template>
 
@@ -49,6 +52,7 @@
         },
         created () {
             this.post = this.$route.params.post;
+            console.log(this.post)
         },
     }
 </script>
