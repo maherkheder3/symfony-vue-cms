@@ -63,24 +63,28 @@ final class ApiPostController extends AbstractController
      */
     public function posts(Request $request, int $page, string $_format, PostRepository $posts, TagRepository $tags): Response
     {
-        $tag = null;
-        if ($request->query->has('tag')) {
-            $tag = $tags->findOneBy(['name' => $request->query->get('tag')]);
-        }
-        $paginator = $posts->findLatest($page, $tag);
-//        $paginator = $posts->createPaginator($query, $page);
-        $iterator = $paginator->getCurrentPageResults();
+//        $tag = null;
+//        if ($request->query->has('tag')) {
+//            $tag = $tags->findOneBy(['name' => $request->query->get('tag')]);
+//        }
+//        $paginator = $posts->findLatest($page, $tag);
+////        $paginator = $posts->createPaginator($query, $page);
+//        $iterator = $paginator->getCurrentPageResults();
+//
+//        $latestPosts = [];
+//
+//        foreach ($iterator as $item) {
+//            $latestPosts[] = $item;
+//        }
+
+        $iterator = $posts->findLatest($page);
 
         $latestPosts = [];
 
         foreach ($iterator as $item) {
-            $latestPosts[] = $item;
+            $latestPosts[] = $item->serializer();
         }
 
-        // Every template name also has two extensions that specify the format and
-        // engine for that template.
-        // See https://symfony.com/doc/current/templating.html#template-suffix
-//        return $this->render('blog/index.'.$_format.'.twig', ['posts' => $latestPosts]);
         return new JsonResponse($latestPosts);
     }
 

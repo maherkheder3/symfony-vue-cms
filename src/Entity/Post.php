@@ -123,7 +123,7 @@ class Post
     private $tags;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",nullable=true)
      */
     private $image;
 
@@ -259,14 +259,17 @@ class Post
     }
 
     public function serializer(){
-        return json_encode([
-            "title"     => $this->title,
-            "content"   => $this->content,
-            "summary"   => $this->summary,
-            "image"     => $this->image,
+        return [
+            "title"         => $this->title,
+            "content"       => $this->content,
+            "summary"       => $this->summary,
+            "image"         => $this->image,
             "publishedAt"   => $this->publishedAt,
-            'author'        => $this->author->getUsername()
-        ], false);
+            'author'        => [
+                "id"        => $this->author->getId(),
+                "username"  => $this->author->getUsername()
+            ]
+        ];
     }
 }
 

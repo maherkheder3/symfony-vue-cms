@@ -51,10 +51,10 @@ class PostRepository extends ServiceEntityRepository
                 ->setParameter('tag', $tag);
         }
 
-        $query = $qb->getQuery();
-        $query->setHydrationMode(Query::HYDRATE_ARRAY);
-//          return $qb->getQuery();
-        return $this->createPaginator($query, $page);
+//        $query = $qb->getQuery();
+//        $query->setHydrationMode(Query::HYDRATE_ARRAY);
+//        return $this->createPaginator($query, $page);
+          return $qb->getQuery()->getResult();
     }
 
     public function createPaginator(Query $query, int $page): Pagerfanta
