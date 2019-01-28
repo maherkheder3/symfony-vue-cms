@@ -157,6 +157,16 @@ final class ApiPostController extends AbstractController
     }
 
     /**
+     * @Route("post/details/{post}", methods={"GET"}, name="post_details")
+     * @param Post $post
+     * @return JsonResponse
+     */
+    public function details(Post $post): Response
+    {
+        return new JsonResponse($post->serializer());
+    }
+
+    /**
      * @return string
      */
     private function generateUniqueFileName()

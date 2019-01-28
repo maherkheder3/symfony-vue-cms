@@ -23,6 +23,9 @@ export default {
         posts (state) {
             return state.posts;
         },
+        details (state) {
+            return state.post;
+        },
     },
     mutations: {
         ['CREATING_POST'](state) {
@@ -54,6 +57,23 @@ export default {
             state.error = error;
             state.posts = [];
         },
+
+
+        ['GET_POST_DETAILS'](state) {
+            state.isLoading = true;
+            state.error = null;
+            state.post = {};
+        },
+        ['POST_DETAILS_SUCCESS'](state, post) {
+            state.isLoading = false;
+            state.error = null;
+            state.post = post;
+        },
+        ['POST_DETAILS_ERROR'](state, error) {
+            state.isLoading = false;
+            state.error = error;
+            state.post = {};
+        },
     },
     actions: {
         createPost ({commit}, message) {
@@ -68,5 +88,13 @@ export default {
                 .then(res => commit('FETCHING_POSTS_SUCCESS', res.data))
                 .catch(err => commit('FETCHING_POSTS_ERROR', err));
         },
+        details ({commit}, postId) {
+            commit('POST_DETAILS_SUCCESS');
+            return PostAPI.details(postId)
+                .then(res => {
+                    commit('POST_DETAILS_SUCCESS', res.data)
+                })
+                .catch(err => commit('POST_DETAILS_ERROR', err));
+        }
     },
 }

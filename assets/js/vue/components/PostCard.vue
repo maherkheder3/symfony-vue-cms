@@ -3,7 +3,7 @@
         <v-layout>
             <v-flex>
                 <v-card>
-
+                    <span class="title" v-text="post.id"></span>
                     <v-img @click="getPostDetails(post)" :style="pointer" :src="getImage(post.image)"
                            height="200px" >
                     </v-img>
@@ -65,7 +65,7 @@
         },
         methods:{
             getPostDetails(post){
-                this.$router.push({ name:'PostDetails',params:{ post: post }})
+                this.$router.push({ name:'PostDetails', params:{ postId: post.id }})
             },
             getDate(date){
                 var from = date.split("-")
@@ -81,16 +81,15 @@
                 console.log(authorId)
             },
             getImage(image){
+                let imageSrc = "";
                 if(image.length > 2)
                 {
-
-                    image =  "/uploads/posts/" + image;
+                    imageSrc =  "/uploads/posts/" + image;
                 }
                 else{
-                    image = "https://unsplash.it/150/300?image=" + Math.floor(Math.random() * (80) + 1)
+                    imageSrc = "https://unsplash.it/150/300?image=" + Math.floor(Math.random() * (80) + 1)
                 }
-                this.post.image = image;
-                return image;
+                return imageSrc;
             }
         }
     }

@@ -12,4 +12,7 @@ export default {
     getAll () {
         return axios.get('/api/posts');
     },
+    details (postId) {
+        return axios.get('/api/post/details/' + postId);
+    },
 }
