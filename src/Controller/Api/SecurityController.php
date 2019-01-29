@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * @Route("/api/security")
+ * @Route("/api/security/")
  */
 class SecurityController extends AbstractController
 {
@@ -38,7 +38,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/login", name="security_login")
+     * @Route("login", name="security_login")
      */
     public function login(Request $request): Response
     {
@@ -52,7 +52,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/newtoken", name="security_new_token")
+     * @Route("newtoken", name="security_new_token")
      */
     public function getNewToken(): Response
     {
@@ -66,10 +66,33 @@ class SecurityController extends AbstractController
      * But, this will never be executed. Symfony will intercept this first
      * and handle the logout automatically. See logout in config/packages/security.yaml
      *
-     * @Route("/logout", name="security_logout")
+     * @Route("logout", name="security_logout")
      */
     public function logout(): void
     {
         throw new \Exception('This should never be reached!');
+    }
+
+    /**
+     * @Route("getmyflashes", name="get_my_flashes")
+     */
+    public function getMyFlashes() : Response
+    {
+//        $this->addFlash('success', 'deleted_successfully');
+//        $this->addFlash('warning', 'deleted_successfully');
+//        $this->addFlash('info', 'deleted_successfully');
+        $flashbag = [];
+
+        foreach ($this->get("session")->getFlashBag()->all() as $type => $messages) {
+            foreach ($messages as $message) {
+                $flashbag[] = [
+                    "type" => $type,
+                    "message" => $message
+                ];
+            }
+        }
+
+        //dd($flashbag);
+        return new JsonResponse($flashbag);
     }
 }

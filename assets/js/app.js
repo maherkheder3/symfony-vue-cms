@@ -14,6 +14,8 @@
 
 import 'babel-polyfill' // for IE 11
 
+
+
 // vue loader
 import Vue from 'vue';
 import router from './vue/router/index';

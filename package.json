@@ -31,11 +31,13 @@
     "hot": "./node_modules/.bin/encore dev-server --http --port 8081 --hot"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.13",
     "babel-polyfill": "^6.26.0",
     "bootstrap-vue": "^2.0.0-rc.11",
     "material-design-icons-iconfont": "^4.0.4",
     "swiper": "^4.4.6",
     "vee-validate": "^2.1.5",
+    "vue-awesome-notifications": "^2.2.9",
     "vuelidate": "^0.7.4",
     "vuetify": "^1.4.3"
   }

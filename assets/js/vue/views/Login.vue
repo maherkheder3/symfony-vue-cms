@@ -90,14 +90,27 @@
                     .then(data => {
                         if(this.error !== "error in login please try again" )
                         {
+                            this.$awn.success("Login is success");
                             if (typeof redirect !== 'undefined') {
                                 this.$router.push({path: redirect});
                             } else {
                                 this.$router.push({path: '/'});
                             }
                         }
+                        else {
+                            this.$awn.alert("wrong username and password");
+                        }
                     });
             },
         },
     }
 </script>
+
+
+
+
+
+
+
+
+

@@ -139,9 +139,11 @@
         },
         methods: {
             createPost () {
+                var self = this;
                 this.$store.dispatch('post/createPost', this.post)
-                    .then(() => console.log(this.post)
-                /*this.$router.push({path: '/posts'})*/ )
+                    .then((data) => {
+                        self.$router.push( { path: '/posts' } )
+                    })
             },
             onFileChanged (event) {
                 this.imageFile = event.target.files[0];

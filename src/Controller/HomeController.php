@@ -51,6 +51,7 @@ class HomeController extends AbstractController
         $isAuthenticated = "false";
         if($this->getUser()){
             $isAuthenticated = "true";
+
             if(in_array('ROLE_ADMIN', $this->getUser()->getRoles())){
                 $role = "ROLE_ADMIN";
             }else{
@@ -61,4 +62,6 @@ class HomeController extends AbstractController
         $data = [ "isAuthenticated" => $isAuthenticated, "roles" => json_encode($role) , "token" => $token];
         return $this->render('Home/index.html.twig', $data);
     }
+
+
 }

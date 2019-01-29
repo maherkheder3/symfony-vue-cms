@@ -1,7 +1,6 @@
 <template>
     <div>
-
-        <loading v-if="isLoading" />
+        <loading v-if="isLoading"/>
 
         <div v-else-if="hasError">
             <v-alert :value="true"
@@ -23,9 +22,9 @@
                     <v-img :src="getImage(post.image)" height="400px"></v-img>
 
                     <v-container px-0>
-                        <span class="display-3 font-weight-black" v-text="post.title"></span>
+                        <span class="display-2 font-weight-black" v-text="post.title"></span>
                     </v-container>
-                    <span  class="headline d-block" v-text="post.summary"></span>
+                    <span class="headline d-block" v-text="post.summary"></span>
                     <span class="mt-5 d-block" v-text="post.content"></span>
                 </v-container>
             </v-card>
@@ -41,13 +40,11 @@
 
     export default {
         name: 'Details',
-        components:{
+        components: {
             Loading
         },
-        data () {
+        data() {
             return {
-                postId : '',
-                test: ''
             };
         },
         computed: {
@@ -70,22 +67,22 @@
             //     return this.$store.getters['security/hasRole']('ROLE_ADMIN');
             // }
         },
-        created () {
+        created() {
             this.$store.dispatch('post/details', this.$route.params.postId);
         },
-        methods:{
-            getImage(image){
+        methods: {
+            getImage(image) {
                 let imageSrc = "";
-                if(image && image.length > 2)
-                {
-                    imageSrc =  "/uploads/posts/" + image;
-                }
-                else{
+                if (image && image.length > 2) {
+                    imageSrc = "/uploads/posts/" + image;
+                } else {
                     imageSrc = "https://unsplash.it/150/300?image=" + Math.floor(Math.random() * (80) + 1)
                 }
                 return imageSrc;
             },
-            xxxx(){
+            xxxx() {
+                this.$awn.success("Login is success")
+                this.$awn.warning("Your custom message")
                 console.log(this.post);
             }
         }

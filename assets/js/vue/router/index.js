@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import store from '../store';
 import Home from '../views/Home';
 import Login from '../views/Login';
-import Posts from '../views/Posts';
+import Posts from '../views/post/Posts';
 import Backend from "../views/Admin/Backend";
 import Create from "../views/post/Create";
 import details from "../views/post/details";
@@ -11,6 +11,20 @@ import Vuetify from 'vuetify'
 import colors from 'vuetify/es5/util/colors'
 import VeeValidate from 'vee-validate'
 
+/**
+ tip
+ info
+ success
+ warning
+ alert      */
+// https://www.npmjs.com/package/vue-awesome-notifications
+import VueAWN from 'vue-awesome-notifications'
+
+
+
+Vue.use(VueAWN, {
+    duration: 5000
+})
 
 
 Vue.use(VeeValidate)

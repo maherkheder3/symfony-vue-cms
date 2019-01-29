@@ -105,29 +105,32 @@ final class ApiPostController extends AbstractController
      */
     public function create(Request $request)
     {
-        $data = json_decode($request->getContent(), true);
-        $data = $data["message"];
-        $post = new Post();
-        $post->setTitle($data["title"]);
-        $post->setSummary($data["summary"]);
-        $post->setContent($data["content"]);
-        $post->setImage($data["image"]);
-        //        $post->setAuthor($this->getUser());
+        try{
+            $data = json_decode($request->getContent(), true);
+            $data = $data["message"];
+            $post = new Post();
+            $post->setTitle($data["title"]);
+            $post->setSummary($data["summary"]);
+            $post->setContent($data["content"]);
+            $post->setImage($data["image"]);
+            //        $post->setAuthor($this->getUser());
 
-        /** @App\Entity\User $user */
-        $user = $this->userRepository->findOneBy([ "username" => "jane_admin"]);
-        $post->setAuthor($user);
+            /** @App\Entity\User $user */
+            $user = $this->userRepository->findOneBy([ "username" => "jane_admin"]);
+            $post->setAuthor($user);
 
-        $post->setSlug(Slugger::slugify($post->getTitle()));
+            $post->setSlug(Slugger::slugify($post->getTitle()));
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($post);
-        $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+            $this->addFlash("success", "The new post is created");
 
-        $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($post, 'json');
-
-        return new JsonResponse($reports, 200, [], true);
+            return new JsonResponse("Ok");
+        }catch (\Exception $ex) {
+            $this->addFlash("alert", "Error - post didn't created");
+            return new JsonResponse("Error");
+        }
     }
 
     /**

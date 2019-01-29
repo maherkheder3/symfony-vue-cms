@@ -1,13 +1,3 @@
-li.nav-item{
-  cursor: pointer;
-}
-
-.body-container {
-  flex: 1;
-  /* needed to prevent pages with a very small height and browsers not supporting flex */
-  min-height: 600px
-}
-
-h1{
-  font-size: 50px;
+h1,h2,h3,h4,h5,b,span,label,p,div{
+  font-family: Roboto,sans-serif !important;
 }

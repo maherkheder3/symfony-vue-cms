@@ -38,8 +38,8 @@
 </template>
 
 <script>
-    import PostCard from '../components/PostCard';
-    import Loading from '../components/Loading'
+    import PostCard from '../../components/PostCard';
+    import Loading from '../../components/Loading'
 
     export default {
         name: 'posts',

@@ -143,25 +143,31 @@
             }
         },
         created () {
-            let isAuthenticated = JSON.parse(this.$parent.$el.attributes['data-is-authenticated'].value),
-                roles = JSON.parse(this.$parent.$el.attributes['data-roles'].value);
 
-            let csrf_token = this.$parent.$el.attributes['data-token'];
-            let payload = { isAuthenticated: isAuthenticated, roles: roles , csrf_token: csrf_token };
-            this.$store.dispatch('security/onRefresh', payload);
+            if(this.$parent.$el.attributes['data-is-authenticated'] !== undefined)
+            {
+                let isAuthenticated = JSON.parse(this.$parent.$el.attributes['data-is-authenticated'].value),
+                    roles = JSON.parse(this.$parent.$el.attributes['data-roles'].value);
 
-            axios.interceptors.response.use(undefined, (err) => {
-                return new Promise(() => {
-                    if (err.response.status === 403) {
-                        this.$router.push({path: '/login'})
-                    } else if (err.response.status === 500) {
-                        document.open();
-                        document.write(err.response.data);
-                        document.close();
-                    }
-                    throw err;
+                // on refresh page
+                let csrf_token = this.$parent.$el.attributes['data-token'];
+                let payload = { isAuthenticated: isAuthenticated, roles: roles , csrf_token: csrf_token };
+                this.$store.dispatch('security/onRefresh', payload);
+
+                axios.interceptors.response.use(undefined, (err) => {
+                    return new Promise(() => {
+                        if (err.response.status === 403) {
+                            this.$router.push({path: '/login'})
+                        } else if (err.response.status === 500) {
+                            document.open();
+                            document.write(err.response.data);
+                            document.close();
+                        }
+                        throw err;
+                    });
                 });
-            });
+            }
+
 
 
         },
@@ -175,7 +181,6 @@
             admin () {
                 return this.$store.getters['security/hasRole']('ROLE_ADMIN');
             },
-
         },
         methods:{
             logoutHandeln(){
@@ -183,6 +188,7 @@
                 this.$store.dispatch('security/logout')
                 //window.localStorage.removeItem('authuser')
                 this.$router.push({path: '/'})
+                this.$awn.success("Logout is success");
             },
             justInRouter(){
                 let style = {};
@@ -196,12 +202,25 @@
                 return style;
             }
         },
-        // watch: {
-        //     '$route' (to, from) {
-        //         const toDepth = to.path.split('/').length
-        //         const fromDepth = from.path.split('/').length
-        //         this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-        //     }
-        // }
+        watch: {
+            '$route' (to, from) {
+                // const toDepth = to.path.split('/').length
+                // const fromDepth = from.path.split('/').length
+                // this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+
+
+                // get all message from
+                var self = this;
+                axios.post('/api/security/getmyflashes').then((data) => {
+                    try {
+                        if(data !== null){
+                            data.data.forEach(function (data) {
+                                self.$awn[data.type](data.message);
+                            })
+                        }
+                    }catch (e) { }
+                });
+            }
+        }
     }
 </script>

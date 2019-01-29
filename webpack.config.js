@@ -21,8 +21,9 @@ Encore
 
     .addEntry('js/app', './assets/js/app.js')
     .addStyleEntry('css/app', [
-        './assets/scss/app.scss',
-        './node_modules/vuetify/dist/vuetify.min.css'
+        './node_modules/vuetify/dist/vuetify.min.css',
+        "vue-awesome-notifications/dist/styles/style.css",
+        './assets/scss/app.scss'
     ])
 
     // .addEntry('js/login', './assets/js/login.js')
