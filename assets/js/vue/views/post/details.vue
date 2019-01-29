@@ -10,10 +10,17 @@
             </v-alert>
         </div>
 
+        <div v-else-if="post === undefined">
+            <v-alert :value="true"
+                     type="error">
+                wait
+            </v-alert>
+        </div>
+
         <v-flex v-else>
             <v-card>
                 <v-container py-5>
-                    <!--<v-img :src="getImage(this.post.image)" height="400px"></v-img>-->
+                    <v-img :src="getImage(post.image)" height="400px"></v-img>
 
                     <v-container px-0>
                         <span class="display-3 font-weight-black" v-text="post.title"></span>
@@ -40,6 +47,7 @@
         data () {
             return {
                 postId : '',
+                test: ''
             };
         },
         computed: {
@@ -78,7 +86,7 @@
                 return imageSrc;
             },
             xxxx(){
-                console.log(post());
+                console.log(this.post);
             }
         }
     }

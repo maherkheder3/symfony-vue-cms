@@ -6,6 +6,7 @@ export default {
         isLoading: false,
         error: null,
         posts: [],
+        post:{} // must every things have a first value to save that
     },
     getters: {
         isLoading (state) {
