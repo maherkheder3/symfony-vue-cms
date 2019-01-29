@@ -3,7 +3,6 @@
         <v-layout>
             <v-flex>
                 <v-card>
-                    <span class="title" v-text="post.id"></span>
                     <v-img @click="getPostDetails(post)" :style="pointer" :src="getImage(post.image)"
                            height="200px" >
                     </v-img>
@@ -82,7 +81,7 @@
             },
             getImage(image){
                 let imageSrc = "";
-                if(image.length > 2)
+                if(image !== null && image.length > 2)
                 {
                     imageSrc =  "/uploads/posts/" + image;
                 }

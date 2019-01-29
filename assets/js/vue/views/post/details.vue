@@ -1,5 +1,10 @@
 <template>
     <div>
+
+        <router-link v-if="admin" to="/admin/post/create">
+            <v-btn color="ml-4 primary">Edit Post</v-btn>
+        </router-link>
+
         <loading v-if="isLoading"/>
 
         <div v-else-if="hasError">
@@ -83,6 +88,7 @@
             xxxx() {
                 this.$awn.success("Login is success")
                 this.$awn.warning("Your custom message")
+                this.$awn.alert("Your custom message")
                 console.log(this.post);
             }
         }

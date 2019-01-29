@@ -1,7 +1,7 @@
 <template>
     <div>
         <router-link v-if="admin" to="/admin/post/create">
-            <v-btn color="primary">Create new post</v-btn>
+            <v-btn color="ml-4 primary">Create new post</v-btn>
         </router-link>
 
         <!--<input type="text" v-model.lazily.trim="multiValueList">-->

@@ -1,4 +1,10 @@
 {
+  "name": "symfony-vue-cms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/maherkheder3/symfony-vue-cms.git",
+  "author": "maher <maherkheder3@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "@symfony/webpack-encore": "^0.22.4",
     "axios": "^0.18.0",
