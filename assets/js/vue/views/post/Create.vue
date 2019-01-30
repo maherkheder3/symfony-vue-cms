@@ -36,6 +36,7 @@
 
 
                             <v-container px-0>
+                                <v-img width="400px" :src="getImage(post.image)"></v-img>
                                 <input type="file" @change="onFileChanged">
                                 <v-btn
                                         @click="onUpload"
@@ -81,6 +82,7 @@
 
 <script>
     import axios from 'axios';
+    import defaultImage from './../../../img/default-image.png';
 
     export default {
         name: 'createNewPast',
@@ -130,9 +132,9 @@
             hasPosts() {
                 return this.$store.getters['post/hasPosts'];
             },
-            posts() {
-                return this.$store.getters['post/posts'];
-            },
+            // posts() {
+            //     return this.$store.getters['post/posts'];
+            // },
             admin() {
                 return this.$store.getters['security/hasRole']('ROLE_ADMIN');
             }
@@ -183,7 +185,15 @@
             },
             xxx(){
                 console.log(this.post)
-            }
+            },
+            getImage(image) {
+                if (image && image.length > 2) {
+                    return "/uploads/posts/" + image;
+                }
+                else{
+                    return defaultImage;
+                }
+            },
         },
     }
 </script>

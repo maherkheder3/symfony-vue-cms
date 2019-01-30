@@ -83,6 +83,12 @@ export default {
                 .then(res => commit('CREATING_POST_SUCCESS', res.data))
                 .catch(err => commit('CREATING_POST_ERROR', err));
         },
+        editPost ({commit}, message) {
+            commit('CREATING_POST');
+            return PostAPI.edit(message)
+                .then(res => commit('CREATING_POST_SUCCESS', res.data))
+                .catch(err => commit('CREATING_POST_ERROR', err));
+        },
         fetchPosts ({commit}) {
             commit('FETCHING_POSTS');
             return PostAPI.getAll()

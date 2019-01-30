@@ -40,16 +40,22 @@ final class ApiPostController extends AbstractController
     private $userRepository;
 
     /**
+     * @var \App\Repository\PostRepository
+     */
+    private $postRepository;
+
+    /**
      * ApiPostController constructor.
      * @param SerializerInterface $serializer
      * @param PostService $postService
      */
     public function __construct(SerializerInterface $serializer, PostService $postService,
-                                UserRepository $userRepository)
+                                UserRepository $userRepository, PostRepository $postRepository)
     {
         $this->serializer = $serializer;
         $this->postService = $postService;
         $this->userRepository = $userRepository;
+        $this->postRepository = $postRepository;
     }
 
 
@@ -107,16 +113,11 @@ final class ApiPostController extends AbstractController
     {
         try{
             $data = json_decode($request->getContent(), true);
-            $data = $data["message"];
             $post = new Post();
-            $post->setTitle($data["title"]);
-            $post->setSummary($data["summary"]);
-            $post->setContent($data["content"]);
-            $post->setImage($data["image"]);
-            //        $post->setAuthor($this->getUser());
+            $post->deserializer($data["message"]);
 
             /** @App\Entity\User $user */
-            $user = $this->userRepository->findOneBy([ "username" => "jane_admin"]);
+            $user = $this->getUser();
             $post->setAuthor($user);
 
             $post->setSlug(Slugger::slugify($post->getTitle()));
@@ -125,6 +126,33 @@ final class ApiPostController extends AbstractController
             $em->persist($post);
             $em->flush();
             $this->addFlash("success", "The new post is created");
+
+            return new JsonResponse("Ok");
+        }catch (\Exception $ex) {
+            $this->addFlash("alert", "Error - post didn't created");
+            return new JsonResponse("Error");
+        }
+    }
+
+    /**
+     * @Rest\Post("post/edit", name="editPost")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function edit(Request $request)
+    {
+        try{
+            $data = json_decode($request->getContent(), true);
+            $post = $this->postRepository->find($data["post"]["id"]);
+            $post->deserializer($data["post"]);
+
+            /** @App\Entity\User $user */
+            $user = $this->getUser();
+            $post->setAuthor($user);
+            $post->setSlug(Slugger::slugify($post->getTitle()));
+
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash("success", "The post is Updated");
 
             return new JsonResponse("Ok");
         }catch (\Exception $ex) {

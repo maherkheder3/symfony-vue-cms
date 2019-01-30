@@ -1,8 +1,7 @@
 <template>
     <div>
-
-        <router-link v-if="admin" to="/admin/post/create">
-            <v-btn color="ml-4 primary">Edit Post</v-btn>
+        <router-link v-if="admin" :to="{ name: 'Edit_post' , post: post }">
+            <v-btn color="primary">Edit the Post</v-btn>
         </router-link>
 
         <loading v-if="isLoading"/>
@@ -15,15 +14,14 @@
         </div>
 
         <div v-else-if="post === undefined">
-            <v-alert :value="true"
-                     type="error">
+            <v-alert :value="true" type="error">
                 wait
             </v-alert>
         </div>
 
         <v-flex v-else>
             <v-card>
-                <v-container py-5>
+                <v-container py-4>
                     <v-img :src="getImage(post.image)" height="400px"></v-img>
 
                     <v-container px-0>
@@ -68,9 +66,9 @@
             post() {
                 return this.$store.getters['post/details'];
             },
-            // admin() {
-            //     return this.$store.getters['security/hasRole']('ROLE_ADMIN');
-            // }
+            admin() {
+                return this.$store.getters['security/hasRole']('ROLE_ADMIN');
+            }
         },
         created() {
             this.$store.dispatch('post/details', this.$route.params.postId);

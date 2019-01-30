@@ -272,6 +272,41 @@ class Post
             ]
         ];
     }
+
+    public function deserializer($data){
+        $this->setTitle($data["title"]);
+        $this->setSummary($data["summary"]);
+        $this->setContent($data["content"]);
+
+//        $date = $data["publishedAt"];
+//        // Get the timestamp as the TS tring / 1000
+//        $ts = (int) $date[1];
+//
+//        // Get the timezone name by offset
+//        $tz = (int) $date[3];
+//        $tz = timezone_name_from_abbr("", $tz / 100 * 3600, false);
+//        $tz = new DateTimeZone($tz);
+//
+//        // Create a new DateTime, set the timestamp and the timezone
+//        $dt = new DateTime();
+//        $dt->setTimestamp($ts);
+//        $dt->setTimezone($tz);
+//
+//        $this->setPublishedAt($dt);
+//        dd($this);
+        $this->setImage($data["image"]);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Post
+     */
+    public function setId(int $id): Post
+    {
+        $this->id = $id;
+        return $this;
+}
 }
 
 

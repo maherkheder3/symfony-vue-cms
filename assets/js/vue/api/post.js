@@ -9,6 +9,14 @@ export default {
             }
         );
     },
+    edit (post) {
+        return axios.post(
+            '/api/post/edit',
+            {
+                post: post,
+            }
+        );
+    },
     getAll () {
         return axios.get('/api/posts');
     },

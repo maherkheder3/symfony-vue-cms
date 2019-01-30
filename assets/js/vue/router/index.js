@@ -6,7 +6,8 @@ import Login from '../views/Login';
 import Posts from '../views/post/Posts';
 import Backend from "../views/Admin/Backend";
 import Create from "../views/post/Create";
-import details from "../views/post/details";
+import Edit from "../views/post/Edit";
+import details from "../views/post/Details";
 import Vuetify from 'vuetify'
 import colors from 'vuetify/es5/util/colors'
 import VeeValidate from 'vee-validate'
@@ -48,9 +49,10 @@ let router = new VueRouter({
 
         // Post
         { path: '/admin/post/create', component: Create },
+        { name: 'Edit_post', path: '/admin/post/edit/:postId', component: Edit },
+        { name: 'PostDetails', path: '/post/show/:postId', component: details },
         { path: '/posts', component: Posts },
         { path: '/posts', component: Posts, meta: { requiresAuth: true } },
-        { name: 'PostDetails', path: '/post/show/:postId', component: details },
 
         { path: '*', redirect: '/home' }
     ],

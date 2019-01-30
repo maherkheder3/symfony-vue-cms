@@ -1,35 +1,5 @@
 <template>
     <div>
-        <v-layout>
-            <v-flex>
-                <v-card>
-                    <v-container px-4 py-4>
-                        <form>
-                            <v-text-field
-                                    v-model="login"
-                                    :counter="3"
-                                    :rules="nameRules"
-                                    label="Name"
-                                    required
-                                    id="name"
-                            ></v-text-field>
-
-                            <v-text-field
-                                    v-model="password"
-                                    :counter="3"
-                                    label="Password"
-                                    required
-                                    :type="'password'"
-                                    id="password"
-                            ></v-text-field>
-
-                            <v-btn color="warning" @click="performLogin()" :disabled="login.length === 0 || password.length === 0 || isLoading">Login</v-btn>
-                        </form>
-                    </v-container>
-                </v-card>
-            </v-flex>
-        </v-layout>
-
         <div v-if="isLoading">
             <loading></loading>
         </div>
@@ -39,6 +9,44 @@
                 {{ error }}
             </div>
         </div>
+
+        <v-container v-else fluid fill-height>
+            <v-layout align-center justify-center>
+                <v-flex xs12 sm8 md6>
+                    <v-card class="elevation-12">
+                        <v-toolbar dark color="primary">
+                            <v-toolbar-title>Login form</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                        </v-toolbar>
+                        <v-card-text>
+                            <v-form>
+                                <v-text-field
+                                        v-model="login"
+                                        prepend-icon="person"
+                                        :counter="3"
+                                        :rules="nameRules"
+                                        label="Name"
+                                        required
+                                ></v-text-field>
+
+                                <v-text-field
+                                        v-model="password"
+                                        prepend-icon="lock"
+                                        :counter="3"
+                                        label="Password"
+                                        required
+                                        type="password"
+                                ></v-text-field>
+                            </v-form>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn @click="performLogin()" :disabled="login.length === 0 || password.length === 0 || isLoading" color="primary">Login</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
     </div>
 </template>
 
