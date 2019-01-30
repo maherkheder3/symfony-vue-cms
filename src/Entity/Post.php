@@ -266,6 +266,13 @@ class Post
     }
 
     public function serializer(){
+        $categories = [];
+        foreach ($this->categories as $categoy){
+            $categories[] = [
+                "id" => $categoy->getId(),
+                "name" => $categoy->getName()
+            ];
+        }
         return [
             "id"            => $this->id,
             "title"         => $this->title,
@@ -276,7 +283,8 @@ class Post
             'author'        => [
                 "id"        => $this->author->getId(),
                 "name"  => $this->author->getFullName()
-            ]
+            ],
+            "categories" => $categories
         ];
     }
 

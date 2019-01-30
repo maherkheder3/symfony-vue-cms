@@ -88,6 +88,10 @@ final class ApiPostController extends AbstractController
         $latestPosts = [];
 
         foreach ($iterator as $item) {
+            if(sizeof($latestPosts) >= 16)
+            {
+                break;
+            }
             $latestPosts[] = $item->serializer();
         }
 

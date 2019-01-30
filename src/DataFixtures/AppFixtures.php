@@ -78,6 +78,11 @@ class AppFixtures extends Fixture
         $c1->setIcon("setting");
         $c1->setParent($c);
 
+        $c1 = new Category();
+        $c1->setName("Test");
+        $c1->setIcon("setting");
+        $c1->setParent($c);
+
         foreach ($this->getPostData() as [$title, $slug, $summary, $content, $publishedAt, $author, $tags]) {
             $post = new Post();
             $post->setTitle($title);

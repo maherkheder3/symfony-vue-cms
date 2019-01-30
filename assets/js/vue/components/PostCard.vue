@@ -29,8 +29,10 @@
                     </v-container>
 
                     <v-card-actions :style="{ backgroundColor: this.$vuetify.theme.primary }">
+                        <div v-for="category in post.categories" class="pl-2">
+                            <span v-text="category.name"></span>
+                        </div>
                         <v-spacer></v-spacer>
-
                         <v-btn icon>
                             <v-icon small>favorite</v-icon>
                         </v-btn>
