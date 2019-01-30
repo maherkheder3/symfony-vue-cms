@@ -145,4 +145,19 @@ class Category
         return $this;
     }
 
+    public function serializer(){
+        return [
+            "id"            => $this->id,
+            "name"         => $this->name,
+            "parent"       => $this->parent,
+            "icon"       => $this->icon,
+        ];
+    }
+
+    public function deserializer($data){
+        $this->setName($data["title"]);
+        $this->setParent($data["summary"]);
+        $this->setIcon($data["content"]);
+    }
+
 }
