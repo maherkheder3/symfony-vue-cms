@@ -146,18 +146,25 @@ class Category
     }
 
     public function serializer(){
-        return [
-            "id"            => $this->id,
-            "name"         => $this->name,
-            "parent"       => $this->parent,
-            "icon"       => $this->icon,
+        $data = [
+            "id"       => $this->id,
+            "name"     => $this->name,
+            "icon"     => $this->icon,
         ];
+
+        if($this->getParent() != null) {
+            $data["parent"] = [
+                "id" => $this->getParent()->getId(),
+                "name" => $this->getParent()->getName()
+            ];
+        }
+
+        return $data;
     }
 
     public function deserializer($data){
-        $this->setName($data["title"]);
-        $this->setParent($data["summary"]);
-        $this->setIcon($data["content"]);
+        $this->setName($data["name"]);
+        $this->setIcon($data["icon"]);
     }
 
 }
