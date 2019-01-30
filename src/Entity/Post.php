@@ -127,11 +127,18 @@ class Post
      */
     private $image;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="posts", cascade={"persist"})
+     */
+    private $categories;
+
+
     public function __construct()
     {
         $this->publishedAt = new \DateTime();
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): int
@@ -307,6 +314,35 @@ class Post
         $this->id = $id;
         return $this;
 }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            $category->removePost($this);
+        }
+
+        return $this;
+    }
+
 }
 
 

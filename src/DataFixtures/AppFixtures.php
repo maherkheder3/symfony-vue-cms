@@ -11,6 +11,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\Tag;
@@ -68,6 +69,15 @@ class AppFixtures extends Fixture
 
     private function loadPosts(ObjectManager $manager)
     {
+        $c = new Category();
+        $c->setName("Parent");
+        $c->setIcon("setting");
+
+        $c1 = new Category();
+        $c1->setName("Category");
+        $c1->setIcon("setting");
+        $c1->setParent($c);
+
         foreach ($this->getPostData() as [$title, $slug, $summary, $content, $publishedAt, $author, $tags]) {
             $post = new Post();
             $post->setTitle($title);
@@ -77,6 +87,7 @@ class AppFixtures extends Fixture
             $post->setPublishedAt($publishedAt);
             $post->setAuthor($author);
             $post->addTag(...$tags);
+            $post->addCategory($c1);
 
             foreach (range(1, 5) as $i) {
                 $comment = new Comment();
