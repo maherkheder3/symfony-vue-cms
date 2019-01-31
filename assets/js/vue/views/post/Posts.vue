@@ -7,6 +7,8 @@
         <!--<input type="text" v-model.lazily.trim="multiValueList">-->
         <!--<h5>{{ multiValueList }}</h5>-->
 
+        <search></search>
+
         <loading v-if="isLoading" />
 
         <div v-else-if="hasError">
@@ -40,12 +42,13 @@
 <script>
     import PostCard from '../../components/PostCard';
     import Loading from '../../components/Loading'
-
+    import Search from './Search'
     export default {
         name: 'posts',
         components: {
             PostCard,
-            Loading
+            Loading,
+            Search,
         },
         data () {
             return {

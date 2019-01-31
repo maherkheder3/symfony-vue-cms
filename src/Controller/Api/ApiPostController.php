@@ -58,6 +58,33 @@ final class ApiPostController extends AbstractController
         $this->postRepository = $postRepository;
     }
 
+    /**
+     * @Route("post/search/{q}", methods={"GET"}, name="search_post")
+     * @param String $q
+     * @return JsonResponse
+     */
+    public function search(string $q): Response
+    {
+        $iterator = $this->postRepository->createQueryBuilder('p')
+            ->Where('p.title LIKE :search')
+//            ->andwhere('p.publishedAt <= :now')
+            ->setParameter('search', '%' . $q . '%')
+            ->orderBy('p.publishedAt', 'DESC')
+            ->getQuery()->getResult();
+
+        $latestPosts = [];
+
+        foreach ($iterator as $item) {
+            if(sizeof($latestPosts) >= 16)
+            {
+                break;
+            }
+            $latestPosts[] = $item->serializer();
+        }
+
+        return new JsonResponse($latestPosts);
+    }
+
 
     /**
      * @Route("posts", defaults={"page": "1", "_format"="html"}, methods={"GET"}, name="getAllPosts")
@@ -67,7 +94,7 @@ final class ApiPostController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function posts(Request $request, int $page, string $_format, PostRepository $posts, TagRepository $tags): Response
+    public function posts(Request $request, int $page, string $_format, TagRepository $tags): Response
     {
 //        $tag = null;
 //        if ($request->query->has('tag')) {
@@ -83,7 +110,7 @@ final class ApiPostController extends AbstractController
 //            $latestPosts[] = $item;
 //        }
 
-        $iterator = $posts->findLatest($page);
+        $iterator = $this->postRepository->findLatest($page);
 
         $latestPosts = [];
 
