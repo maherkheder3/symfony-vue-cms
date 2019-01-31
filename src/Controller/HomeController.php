@@ -31,14 +31,10 @@ use Symfony\Component\Routing\Annotation\Route;
  * Controller used to manage blog contents in the public part of the site.
  *
  * @Route("/")
- *
- * @author Ryan Weaver <weaverryan@gmail.com>
- * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  */
 class HomeController extends AbstractController
 {
     /**
-     * it will not handle anymore routes beginning with /api ****
      * @Route("/{vueRouting}", requirements={"vueRouting"="^(?!api|_(profiler|wdt)).*"}, name="index")
      * @return Response
      */
@@ -62,6 +58,4 @@ class HomeController extends AbstractController
         $data = [ "isAuthenticated" => $isAuthenticated, "roles" => json_encode($role) , "token" => $token];
         return $this->render('Home/index.html.twig', $data);
     }
-
-
 }

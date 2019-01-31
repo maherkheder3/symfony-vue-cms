@@ -57,7 +57,7 @@
                     </v-list-tile-content>
                 </v-list-tile>
 
-                <v-list-tile :key="'login-button'" :to="'/admin/backend'">
+                <v-list-tile v-if="admin" :key="'login-button'" :to="'/admin/backend'">
                     <v-list-tile-action>
                         <v-icon>dashboard</v-icon>
                     </v-list-tile-action>
@@ -67,7 +67,7 @@
                 </v-list-tile>
                 <v-list-tile v-if="isAuthenticated" :key="'logout-button'" v-on:click="logoutHandeln()">
                     <v-list-tile-action>
-                        <v-icon>dashboard</v-icon>
+                        <v-icon>logout</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
                         <v-list-tile-title>Logout</v-list-tile-title>
@@ -75,7 +75,7 @@
                 </v-list-tile>
                 <v-list-tile v-else :key="'logout-button'" :to="'/security/login'">
                     <v-list-tile-action>
-                        <v-icon>dashboard</v-icon>
+                        <v-icon>fingerprint</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
                         <v-list-tile-title>Login</v-list-tile-title>
@@ -120,7 +120,7 @@
             return {
                 drawer: true,
                 items: [
-                    { title: 'Home', icon: 'dashboard', path: '/home' },
+                    { title: 'Home', icon: 'home', path: '/home' },
                     { title: 'Posts', icon: 'question_answer', path: '/posts'  },
                 ],
                 mini: true,

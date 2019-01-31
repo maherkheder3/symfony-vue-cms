@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="admin">
         <categories></categories>
         <v-container>
             <v-layout>
@@ -44,6 +44,11 @@
                 { text: 'Large (16px)', value: 'lg' },
                 { text: 'Extra large (24px)', value: 'xl' }
             ]
-        })
+        }),
+        computed: {
+            admin () {
+                return this.$store.getters['security/hasRole']('ROLE_ADMIN');
+            }
+        }
     }
 </script>

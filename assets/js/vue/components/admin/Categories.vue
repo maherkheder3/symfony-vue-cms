@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="admin">
         <v-toolbar color="primary">
             <v-toolbar-title>Categories</v-toolbar-title>
             <v-divider
@@ -88,7 +88,7 @@
             dialog: false,
             headers: [
                 {
-                    text: 'Dessert (100g serving)',
+                    text: 'Name',
                     align: 'left',
                     // sortable: false,
                     value: 'name'
@@ -115,6 +115,9 @@
         computed: {
             formTitle () {
                 return this.editedIndex === -1 ? 'New Category' : 'Edit Category'
+            },
+            admin () {
+                return this.$store.getters['security/hasRole']('ROLE_ADMIN');
             }
         },
 
@@ -127,7 +130,6 @@
         created () {
             this.initialize()
         },
-
         methods: {
             initialize () {
                 let self = this;

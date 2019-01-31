@@ -41,7 +41,10 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn @click="performLogin()" :disabled="login.length === 0 || password.length === 0 || isLoading" color="primary">Login</v-btn>
+                            <v-btn @click="performLogin()" :disabled="login.length === 0 || password.length === 0 || isLoading" color="primary">
+                                Login
+                                <v-icon right>fingerprint</v-icon>
+                            </v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
