@@ -48,6 +48,10 @@
                                 required
                         ></v-textarea>
 
+                        <tags :tags="post.tags"></tags>
+
+                        <v-btn @click="xxx">xxx</v-btn>
+
                         <v-container px-0>
                             <v-img width="400px" :src="getImage(post.image)"></v-img>
                             <input type="file" @change="onFileChanged">
@@ -73,9 +77,12 @@
 <script>
     import axios from 'axios';
     import defaultImage from './../../../img/default-image.png';
+    import Tags from "../../components/admin/Tags";
+    import Loading from "../../components/Loading";
 
     export default {
         name: 'editpost',
+        components: {Tags, Loading},
         $_veeValidate: {
             validator: 'new'
         },
@@ -163,6 +170,9 @@
                     return defaultImage;
                 }
             },
+            xxx(){
+                console.log(this.post.tags);
+            }
         },
     }
 </script>

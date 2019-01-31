@@ -273,6 +273,15 @@ class Post
                 "name" => $categoy->getName()
             ];
         }
+
+        $tags = [];
+        foreach ($this->tags as $tag){
+            $tags[] = [
+                "id" => $tag->getId(),
+                "name" => $tag->getName()
+            ];
+        }
+
         return [
             "id"            => $this->id,
             "title"         => $this->title,
@@ -280,6 +289,7 @@ class Post
             "summary"       => $this->summary,
             "image"         => $this->image,
             "publishedAt"   => $this->publishedAt,
+            "tags"          => $tags,
             'author'        => [
                 "id"        => $this->author->getId(),
                 "name"  => $this->author->getFullName()
