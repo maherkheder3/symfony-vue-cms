@@ -20,6 +20,7 @@ import VeeValidate from 'vee-validate'
  alert      */
 // https://www.npmjs.com/package/vue-awesome-notifications
 import VueAWN from 'vue-awesome-notifications'
+import Author from "./../views/Author";
 
 
 
@@ -44,6 +45,7 @@ let router = new VueRouter({
     mode: 'history',
     routes: [
         { path: '/home', component: Home },
+        { name: 'author', path: '/author', component: Author },
         { path: '/security/login', component: Login },
         { path: '/admin/backend', component: Backend },
 

@@ -18,7 +18,7 @@
         ],
         methods:{
             getAuthorPage(id){
-
+                this.$router.push({ name:'author', params:{ id: id }})
             },
             getAvatar(){
                 return avatar;
