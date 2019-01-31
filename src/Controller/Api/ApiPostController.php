@@ -79,7 +79,7 @@ final class ApiPostController extends AbstractController
             {
                 break;
             }
-            $latestPosts[] = $item->serializer();
+            $latestPosts[] = $item->serializer(true);
         }
 
         return new JsonResponse($latestPosts);

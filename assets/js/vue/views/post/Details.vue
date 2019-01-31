@@ -25,8 +25,19 @@
                     <v-img :src="getImage(post.image)" height="400px"></v-img>
 
                     <v-container px-0>
-                        <span class="display-2 font-weight-black" v-text="post.title"></span>
+                        <span class="display-1 font-weight-black" v-text="post.title"></span>
                     </v-container>
+
+                    <v-container px-3 py-3 fill-height fluid pa-0>
+                        <v-layout fill-height>
+                            <v-flex xs12 align-end flexbox>
+                                <span v-text="getDate(post.publishedAt.date)"></span>
+                                <span :style="[pointer, {'float':'right', 'padding-right': '10px'}]"
+                                      v-on:click="getAuthorPage(post.author.id)" v-text="post.author.name"></span>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+
                     <span class="headline d-block" v-text="post.summary"></span>
                     <span class="mt-5 d-block" v-text="post.content"></span>
                 </v-container>
@@ -88,7 +99,20 @@
                 this.$awn.warning("Your custom message")
                 this.$awn.alert("Your custom message")
                 console.log(this.post);
-            }
+            },
+            getDate(date){
+                var from = date.split("-")
+                var f = new Date(from[2].split(' ')[0], from[1] - 1, from[0])
+
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+
+                return f.getDay() + " " + monthNames[f.getMonth()] + " " + f.getFullYear()
+            },
+            getAuthorPage(authorId){
+                console.log(authorId)
+            },
         }
     }
 </script>

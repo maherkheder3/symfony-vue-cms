@@ -265,7 +265,16 @@ class Post
         $this->image = $image;
     }
 
-    public function serializer(){
+    public function serializer($min = false){
+
+        if($min){
+            return [
+                "id"            => $this->id,
+                "title"         => $this->title,
+                "image"         => $this->image,
+            ];
+        }
+
         $categories = [];
         foreach ($this->categories as $categoy){
             $categories[] = [

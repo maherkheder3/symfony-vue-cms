@@ -57,6 +57,7 @@
                 }
                 if(val && val !== this.select && this.querySelections(val)){
                     console.log("ok");
+
                 }
             }
         },
