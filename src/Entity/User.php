@@ -185,4 +185,5 @@ class User implements UserInterface, \Serializable
         // add $this->salt too if you don't use Bcrypt or Argon2i
         [$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
     }
+
 }

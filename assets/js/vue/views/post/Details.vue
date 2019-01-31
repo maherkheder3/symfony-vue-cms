@@ -28,12 +28,13 @@
                         <span class="display-1 font-weight-black" v-text="post.title"></span>
                     </v-container>
 
-                    <v-container px-3 py-3 fill-height fluid pa-0>
+                    <v-container px-3 py-3 fill-height fluid>
                         <v-layout fill-height>
-                            <v-flex xs12 align-end flexbox>
+                            <v-flex xs12 align-end flexbox py-4>
                                 <span v-text="getDate(post.publishedAt.date)"></span>
-                                <span :style="[pointer, {'float':'right', 'padding-right': '10px'}]"
-                                      v-on:click="getAuthorPage(post.author.id)" v-text="post.author.name"></span>
+                                <v-flex :style="{ float:'right' }">
+                                    <author :author="post.author"></author>
+                                </v-flex>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -51,11 +52,13 @@
 
 <script>
     import Loading from '../../components/Loading'
+    import Author from "../../components/Author";
 
     export default {
         name: 'Details',
         components: {
-            Loading
+            Loading,
+            Author
         },
         data() {
             return {

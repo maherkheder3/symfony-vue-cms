@@ -1,5 +1,6 @@
 {
   "build/css/app.css": "http://localhost:8081/build/css/app.css",
   "build/js/app.js": "http://localhost:8081/build/js/app.js",
-  "build/images/default-image.png": "http://localhost:8081/build/images/default-image.60b07355.png"
+  "build/images/default-image.png": "http://localhost:8081/build/images/default-image.60b07355.png",
+  "build/images/user-avatar.jpeg": "http://localhost:8081/build/images/user-avatar.4dcdc8d2.jpeg"
 }

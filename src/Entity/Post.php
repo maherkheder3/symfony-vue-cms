@@ -301,7 +301,7 @@ class Post
             "tags"          => $tags,
             'author'        => [
                 "id"        => $this->author->getId(),
-                "name"  => $this->author->getFullName()
+                "name"  => $this->author->getFullName(),
             ],
             "categories" => $categories
         ];

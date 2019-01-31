@@ -7,15 +7,23 @@
                            height="200px" >
                     </v-img>
 
-                    <v-container px-3 py-3 fill-height fluid pa-0>
-                        <v-layout fill-height>
-                            <v-flex xs12 align-end flexbox>
+                    <v-container px-3 py-3 fill-width fluid pa-0>
+                        <v-layout xs12>
+                            <v-flex style="display: block; width: 100%">
                                 <span class="headline" :style="[pointer, cardText]" v-text="post.title.substring(0,18)"
                                       @click="getPostDetails(post)"></span>
+                            </v-flex>
+                        </v-layout>
 
+                        <v-layout>
+                            <v-flex xs8 align-end flexbox>
+                                <v-flex>
+                                    <author :author="post.author"></author>
+                                </v-flex>
+                            </v-flex>
+                            <v-flex xs4 py-4>
+                                <v-icon style="font-size: medium">calendar_today</v-icon>
                                 <span v-text="getDate(post.publishedAt.date)"></span>
-                                <span :style="[pointer, {'float':'right', 'padding-right': '10px'}]"
-                                      v-on:click="getAuthorPage(post.author.id)" v-text="post.author.name"></span>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -50,14 +58,18 @@
 </template>
 
 <script>
+    import Author from "./Author";
+
     export default {
         name: 'PostCard',
         props: ['post'],
+        components:{ Author },
         data(){
             return {
                 cardText:{
                     display: 'block',
-                    height: '70px'
+                    height: '70px',
+                    width: '100%'
                 },
                 pointer: {
                     'cursor': 'pointer'
