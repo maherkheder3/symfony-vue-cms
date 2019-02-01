@@ -21,9 +21,9 @@
                                     <author :author="post.author"></author>
                                 </v-flex>
                             </v-flex>
-                            <v-flex xs4 py-4>
+                            <v-flex xs4 >
                                 <v-icon style="font-size: medium">calendar_today</v-icon>
-                                <span v-text="getDate(post.publishedAt.date)"></span>
+                                <span class="caption" v-text="getDate(post.publishedAt.date)"></span>
                             </v-flex>
                         </v-layout>
                     </v-container>

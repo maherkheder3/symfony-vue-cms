@@ -58,4 +58,14 @@ class HomeController extends AbstractController
         $data = [ "isAuthenticated" => $isAuthenticated, "roles" => json_encode($role) , "token" => $token];
         return $this->render('Home/index.html.twig', $data);
     }
+
+//    /**
+//     * @Route("/api/author/{id}", name="author_page")
+//     * @param User $author
+//     * @return JsonResponse
+//     */
+//    public function author(User $author): Response
+//    {
+//        return new JsonResponse($author->serialize(), 200, [], true);
+//    }
 }

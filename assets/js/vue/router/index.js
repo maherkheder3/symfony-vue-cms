@@ -45,7 +45,7 @@ let router = new VueRouter({
     mode: 'history',
     routes: [
         { path: '/home', component: Home },
-        { name: 'author', path: '/author', component: Author },
+        { name: 'author', path: '/author/:id', component: Author },
         { path: '/security/login', component: Login },
         { path: '/admin/backend', component: Backend },
 

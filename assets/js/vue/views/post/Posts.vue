@@ -30,7 +30,7 @@
 
             <v-layout row wrap>
                 <v-flex v-for="post in posts"
-                        v-bind="{ [`xs12 sm6 md4 lg3`]: true }"
+                        v-bind="{ [`xs12 sm6 md4 lg4 xl3`]: true }"
                         :key="getKey(post.id)" >
                     <postCard :post="post"></postCard>
                 </v-flex>
