@@ -12,10 +12,8 @@
 
         <v-layout v-else row wrap fill>
 
-            <v-flex xs12 style="margin-bottom: 150px">
-                <v-img style="width: 100%; position: absolute;" src="https://picsum.photos/1250/600/?random">
-
-                </v-img>
+            <v-flex xs12 style="margin-bottom: 150px; background-color: white">
+                <v-img style="width: 100%; position: absolute;" src="https://picsum.photos/1200/600/?image=715"></v-img>
             </v-flex>
 
             <v-flex px-4 xs12 md4 style="min-height:1200px">
@@ -116,7 +114,7 @@
                 </div>
             </v-flex>
             <v-flex xs12 md8 class="">
-                <v-layout style="height: 320px; width: 100%" hidden-xs-only hidden-sm-only></v-layout>
+                <v-layout style="height: 140px; width: 100%" hidden-xs-only hidden-sm-only></v-layout>
                 <div v-if="!hasPosts">
                     <v-alert :value="true" type="info">
                         No posts!
@@ -124,6 +122,12 @@
                 </div>
 
                 <v-layout v-else row wrap mt-4>
+                    <v-flex xs12 px-5 py-2 class="" style="z-index: 100">
+                        <span class="display-3" :color="white" v-text="author.fullName"></span>
+                        <span class="subheading" style="display: block"
+                              v-text="'Role : ' + author.roles[0].replace('ROLE_', '') + ' - Working in Germany and have ' + posts.length + ' posts'"></span>
+                    </v-flex>
+
                     <v-flex v-for="(post, index) in posts"
                             v-bind="{ [`xs12 sm6 md6 lg6`]: true }"
                             :key="index" pa-2>

@@ -191,7 +191,8 @@
             },
             justInRouter(){
                 let style = {};
-                if(this.$router.currentRoute.path === "/home")
+                if(this.$router.currentRoute.path === "/home" ||
+                    this.$router.currentRoute.name === "author" )
                 {
                     style = {
                         'margin': 0,
