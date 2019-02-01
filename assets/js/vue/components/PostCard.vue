@@ -90,9 +90,6 @@
 
                 return f.getDay() + " " + monthNames[f.getMonth()] + " " + f.getFullYear()
             },
-            getAuthorPage(authorId){
-                console.log(authorId)
-            },
             getImage(image){
                 let imageSrc = "";
                 if(image !== null && image.length > 2)
@@ -100,7 +97,8 @@
                     imageSrc =  "/uploads/posts/" + image;
                 }
                 else{
-                    imageSrc = "https://unsplash.it/150/300?image=" + Math.floor(Math.random() * (80) + 1)
+                    // imageSrc = "https://unsplash.it/150/300?image=" + Math.floor(Math.random() * (80) + 1)
+                    imageSrc = "https://picsum.photos/400/200/?image=" + (Math.floor(Math.random() * (80) + 1))
                 }
                 return imageSrc;
             }

@@ -13,6 +13,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Entity\User;
 use App\Events;
 use App\Form\CommentType;
 use App\Repository\PostRepository;
@@ -23,6 +24,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,13 +61,20 @@ class HomeController extends AbstractController
         return $this->render('Home/index.html.twig', $data);
     }
 
-//    /**
-//     * @Route("/api/author/{id}", name="author_page")
-//     * @param User $author
-//     * @return JsonResponse
-//     */
-//    public function author(User $author): Response
-//    {
-//        return new JsonResponse($author->serialize(), 200, [], true);
-//    }
+    /**
+     * @Route("/api/author/{id}", name="author_page")
+     * @param User $author
+     * @return JsonResponse
+     */
+    public function author(User $author): Response
+    {
+        $json = [
+            "id" =>       $author->getId(),
+            "username" =>       $author->getUsername(),
+            "fullName" =>       $author->getFullName() ,
+            "email" =>       $author->getEmail(),
+            "roles" =>       $author->getRoles()
+        ];
+        return new JsonResponse($json, 200, []);
+    }
 }

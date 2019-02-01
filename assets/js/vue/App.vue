@@ -33,10 +33,11 @@
                 <v-list dense>
                     <v-list-tile avatar>
                         <v-list-tile-avatar>
-                            <img src="https://randomuser.me/api/portraits/men/85.jpg" >
+                            <!--<img :src="this.DefaultUser" >-->
+                            <v-img :src="getAvatar()"></v-img>
                         </v-list-tile-avatar>
                         <v-list-tile-content>
-                            <v-list-tile-title>John Leider</v-list-tile-title>
+                            <v-list-tile-title>Jone Doe</v-list-tile-title>
                         </v-list-tile-content>
                         <v-list-tile-action>
                             <v-btn icon @click.stop="drawer = !drawer">
@@ -113,6 +114,7 @@
 
 <script>
     import axios from 'axios';
+    import DefaultUser from './../img/user-avatar.jpeg'
 
     export default {
         name: 'app',
@@ -197,6 +199,9 @@
                     }
                 }
                 return style;
+            },
+            getAvatar(){
+                return DefaultUser;
             }
         },
         watch: {

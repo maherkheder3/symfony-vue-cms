@@ -1,7 +1,7 @@
 <template>
     <v-flex :style="{ cursor: 'pointer' }" pa-0 ma-0 @click="getAuthorPage(author.id)">
         <v-avatar class="mr-2">
-            <v-img :src="getAvatar()"></v-img>
+            <v-img :src="getAvatar(author.name)"></v-img>
         </v-avatar>
         <span
               v-on:click="getAuthorPage(author.id)" v-text="author.name">
@@ -20,8 +20,12 @@
             getAuthorPage(id){
                 this.$router.push({ name:'author', params:{ id: id }})
             },
-            getAvatar(){
-                return avatar;
+            getAvatar(name){
+                if(name === "Jane Doe"){
+                    return avatar;
+                }else{
+                    return "https://randomuser.me/api/portraits/men/" + Math.round(Math.random() * 11 + 10) + ".jpg";
+                }
             }
         }
     }

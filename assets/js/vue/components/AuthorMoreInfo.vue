@@ -42,14 +42,14 @@
                 <v-list>
                     <v-list-tile>
                         <v-list-tile-action>
-                            <v-switch v-model="message" color="purple"></v-switch>
+                            <v-switch v-model="message" color="primary"></v-switch>
                         </v-list-tile-action>
                         <v-list-tile-title>Enable messages</v-list-tile-title>
                     </v-list-tile>
 
                     <v-list-tile>
                         <v-list-tile-action>
-                            <v-switch v-model="hints" color="purple"></v-switch>
+                            <v-switch v-model="hints" color="primary"></v-switch>
                         </v-list-tile-action>
                         <v-list-tile-title>Enable hints</v-list-tile-title>
                     </v-list-tile>
@@ -68,6 +68,7 @@
 
 <script>
     export default {
+        props:["avatar", "username"],
         props:["avatar", "username"],
         data: () => ({
             fav: true,
