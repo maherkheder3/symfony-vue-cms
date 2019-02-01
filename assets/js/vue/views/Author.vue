@@ -122,8 +122,8 @@
                 </div>
 
                 <v-layout v-else row wrap mt-4>
-                    <v-flex xs12 px-5 py-2 class="" style="z-index: 100">
-                        <span class="display-3" :color="white" v-text="author.fullName"></span>
+                    <v-flex xs12 px-5 py-2 class="" style="z-index: 2">
+                        <span class="display-3" v-text="author.fullName"></span>
                         <span class="subheading" style="display: block"
                               v-text="'Role : ' + author.roles[0].replace('ROLE_', '') + ' - Working in Germany and have ' + posts.length + ' posts'"></span>
                     </v-flex>

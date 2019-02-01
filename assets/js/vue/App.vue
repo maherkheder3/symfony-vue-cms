@@ -107,16 +107,18 @@
                     <router-view />
                 </transition>
             </v-container>
+            <cfooter></cfooter>
         </v-content>
-        <v-footer app></v-footer>
     </v-app>
 </template>
 
 <script>
     import axios from 'axios';
     import DefaultUser from './../img/user-avatar.jpeg'
+    import cfooter from "./components/Footer";
 
     export default {
+        components:{ cfooter },
         name: 'app',
         data () {
             return {
@@ -196,9 +198,13 @@
                 {
                     style = {
                         'margin': 0,
-                        padding: 0
+                        padding: 0,
                     }
                 }
+
+                style.minHeight = (window.innerHeight - 255) + "px";
+                console.log(style);
+
                 return style;
             },
             getAvatar(){
