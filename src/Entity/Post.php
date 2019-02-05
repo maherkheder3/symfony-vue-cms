@@ -312,6 +312,17 @@ class Post
         $this->setSummary($data["summary"]);
         $this->setContent($data["content"]);
 
+        $this->setImage($data["image"]);
+
+        foreach ($data["tags"] as $tag)
+        {
+            $t = new Tag();
+            if($tag['id'] && $tag['id'] != "") { $t->setId((int)$tag['id']); }
+            $t->setName($tag['name']);
+
+            $this->addTag($t);
+        }
+
 //        $date = $data["publishedAt"];
 //        // Get the timestamp as the TS tring / 1000
 //        $ts = (int) $date[1];
@@ -328,7 +339,7 @@ class Post
 //
 //        $this->setPublishedAt($dt);
 //        dd($this);
-        $this->setImage($data["image"]);
+
     }
 
     /**

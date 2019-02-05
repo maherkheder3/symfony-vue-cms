@@ -173,22 +173,34 @@ final class ApiPostController extends AbstractController
     public function edit(Request $request)
     {
         try{
-            $data = json_decode($request->getContent(), true);
-            $post = $this->postRepository->find($data["post"]["id"]);
-            $post->deserializer($data["post"]);
+//            $data = json_decode($request->getContent(), true);
+//            $post = $this->postRepository->find($data["post"]["id"]);
 
-            /** @App\Entity\User $user */
-            $user = $this->getUser();
-            $post->setAuthor($user);
-            $post->setSlug(Slugger::slugify($post->getTitle()));
+//            $form = $this->createForm(PostType::class, $post);
+//            $form->submit($data);
+//
+//
+//            if ($form->isValid()) {
+//                dd("ttt");
+//            }
 
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("success", "The post is Updated");
+
+            dd("false");
+//
+//            $post->deserializer($data["post"]);
+//
+//            /** @App\Entity\User $user */
+//            $user = $this->getUser();
+//            $post->setAuthor($user);
+//            $post->setSlug(Slugger::slugify($post->getTitle()));
+//
+//            $this->getDoctrine()->getManager()->flush();
+//            $this->addFlash("success", "The post is Updated");
 
             return new JsonResponse("Ok");
         }catch (\Exception $ex) {
-            $this->addFlash("alert", "Error - post didn't created");
-            return new JsonResponse("Error");
+            $this->addFlash("alert", "Error - post didn't Updated");
+            return new JsonResponse("Error - " . $ex->getMessage());
         }
     }
 

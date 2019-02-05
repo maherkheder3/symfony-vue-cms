@@ -72,4 +72,12 @@ class Tag implements \JsonSerializable
     {
         return $this->name;
     }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 }

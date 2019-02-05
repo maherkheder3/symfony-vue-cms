@@ -50,7 +50,7 @@
 
                         <tags :tags="post.tags"></tags>
 
-                        <v-btn @click="xxx">xxx</v-btn>
+                        <v-btn @click="xxx(post.tags)">xxx</v-btn>
 
                         <v-container px-0>
                             <v-img width="400px" :src="getImage(post.image)"></v-img>
@@ -143,6 +143,7 @@
             updatePost () {
                 var self = this;
                 this.post.author = undefined;
+                this.post.tags = this.$store.state.post.tags;
                 this.$store.dispatch('post/editPost', this.post)
                     .then((data) => {
                         self.$router.push( { path: '/posts' } )
@@ -170,8 +171,9 @@
                     return defaultImage;
                 }
             },
-            xxx(){
-                console.log(this.post.tags);
+            xxx(t){
+                // console.log(this.$store.state.post.tags)
+                console.log(this.$store.state.post.tags)
             }
         },
     }

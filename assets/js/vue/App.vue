@@ -203,8 +203,6 @@
                 }
 
                 style.minHeight = (window.innerHeight - 255) + "px";
-                console.log(style);
-
                 return style;
             },
             getAvatar(){

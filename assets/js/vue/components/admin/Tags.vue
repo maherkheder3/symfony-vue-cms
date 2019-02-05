@@ -84,27 +84,28 @@
 <script>
     export default {
         props:["tags"],
-        data: () => ({
-            activator: null,
-            attach: null,
-            colors: ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange'],
-            editing: null,
-            index: -1,
-            items: [],
-            nonce: 1,
-            menu: false,
-            model: [],
-            x: 0,
-            search: null,
-            y: 0
-        }),
+        data() {
+            return {
+                activator: null,
+                attach: null,
+                colors: ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange'],
+                editing: null,
+                index: -1,
+                items: [],
+                nonce: 1,
+                menu: false,
+                model: [],
+                x: 0,
+                search: null,
+                y: 0
+            }
+        },
         created(){
             this.tags.forEach(function (tag) {
                 tag.text = tag.name;
             });
 
             this.model = this.tags;
-
             // this.items = this.tags.slice(); // return data
             // this.model = this.tags.slice(); //
         },
@@ -119,19 +120,44 @@
                     if (typeof v === 'string') {
                         v = {
                             text: v,
+                            name: v,
                             color: this.colors[this.nonce - 1]
                         }
 
                         this.items.push(v)
 
                         this.nonce++
+
                     }
 
                     return v
                 })
+
+                // props.tags = this.model;
+                console.log(this.$store.state.post.tags)
+                this.$store.state.post.tags = this.model;
+            },
+        },
+        computed: {
+            isLoading() {
+                return this.$store.getters['post/isLoading'];
+            },
+            hasError() {
+                return this.$store.getters['post/hasError'];
+            },
+            error() {
+                return this.$store.getters['post/error'];
+            },
+            hasPosts() {
+                return this.$store.getters['post/hasPosts'];
+            },
+            post() {
+                return this.$store.getters['post/details'];
+            },
+            admin() {
+                return this.$store.getters['security/hasRole']('ROLE_ADMIN');
             }
         },
-
         methods: {
             edit (index, item) {
                 if (!this.editing) {
