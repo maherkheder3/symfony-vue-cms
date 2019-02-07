@@ -1,9 +1,5 @@
 <template>
     <div>
-        <router-link v-if="admin" :to="{ name: 'Edit_post' , post: post }">
-            <v-btn color="primary">Edit the Post</v-btn>
-        </router-link>
-
         <loading v-if="isLoading"/>
 
         <div v-else-if="hasError">
@@ -22,6 +18,12 @@
         <v-flex v-else>
             <v-card>
                 <v-container py-4>
+                    <router-link v-if="admin" :to="{ name: 'Edit_post' , post: post }">
+                        <v-btn color="primary" absolute="absolute" style="z-index: 1; right: 0">
+                            <v-icon>edit</v-icon>
+                        </v-btn>
+                    </router-link>
+
                     <v-img :src="getImage(post.image)" height="400px"></v-img>
 
                     <v-container px-0>
