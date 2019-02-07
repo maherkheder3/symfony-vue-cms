@@ -166,6 +166,37 @@ final class ApiPostController extends AbstractController
     }
 
     /**
+     * @Rest\Post("post/edittitle", name="edit_Post_title")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function editTitle(Request $request)
+    {
+        try{
+            $data = json_decode($request->getContent(), true);
+            $post = $this->postRepository->find($data["id"]);
+            $post->setTitle($data["title"]);
+
+            /** @App\Entity\User $user */
+            $user = $this->getUser();
+            $post->setAuthor($user);
+            $post->setSlug(Slugger::slugify($post->getTitle()));
+
+            $this->getDoctrine()->getManager()->flush();
+            return new JsonResponse([
+                "title" => "success",
+                "massage" => "The post is Updated"
+            ]);
+        }catch (\Exception $ex) {
+//            $this->addFlash("alert", "Error - post didn't Updated");
+            return new JsonResponse([
+                "title" => "alert",
+                "massage" => "Error - post didn't Updated"
+            ]);
+        }
+    }
+
+    /**
      * @Rest\Post("post/edit", name="editPost")
      * @param Request $request
      * @return JsonResponse

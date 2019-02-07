@@ -25,7 +25,12 @@
                     <v-img :src="getImage(post.image)" height="400px"></v-img>
 
                     <v-container px-0>
-                        <span class="display-1 font-weight-black" v-text="post.title"></span>
+                        <div v-if="admin">
+                            <span id="post-title" contenteditable="true" @blur="setNewPostTitle(post.title)" class="display-1 font-weight-black">{{ post.title }}</span>
+                        </div>
+                        <div v-else>
+                            <span class="display-1 font-weight-black" v-text="post.title"></span>
+                        </div>
                     </v-container>
 
                     <v-container px-3 py-3 fill-height fluid>
@@ -53,6 +58,7 @@
 
 
 <script>
+    import axios from 'axios'
     import Loading from '../../components/Loading'
     import Author from "../../components/Author";
     import Comments from "../../components/Comments";
@@ -63,10 +69,6 @@
             Loading,
             Author,
             Comments
-        },
-        data() {
-            return {
-            };
         },
         computed: {
             isLoading() {
@@ -81,8 +83,10 @@
             // hasPosts() {
             //     return this.$store.getters['post/hasPosts'];
             // },
-            post() {
-                return this.$store.getters['post/details'];
+            post: {
+                get(){
+                    return this.$store.getters['post/details'];
+                }
             },
             admin() {
                 return this.$store.getters['security/hasRole']('ROLE_ADMIN');
@@ -121,6 +125,23 @@
             getAuthorPage(authorId){
                 console.log(authorId)
             },
+            setNewPostTitle(data){
+                let postTitle = document.getElementById('post-title');
+
+                var value = postTitle.innerText.trim();
+                if(data !== value){
+                    let post = {
+                        "id" :this.post.id,
+                        "title" : value
+                    };
+
+                    var self = this;
+                    axios.post('/api/post/edittitle', post).then(function (data) {
+                        self.$awn[data.data.title](data.data.massage)
+                        self.post.title = value;
+                    })
+                }
+            }
         }
     }
 </script>
