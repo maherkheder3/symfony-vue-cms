@@ -20,24 +20,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  * @ORM\Table(name="post")
  *
- * Defines the properties of the Post entity to represent the blog posts.
- *
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
- *
- * Tip: if you have an existing database, you can generate these entity class automatically.
- * See https://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html
- *
- * @author Ryan Weaver <weaverryan@gmail.com>
- * @author Javier Eguiluz <javier.eguiluz@gmail.com>
- * @author Yonel Ceruto <yonelceruto@gmail.com>
  */
 class Post
 {
     /**
-     * Use constants to define configuration options that rarely change instead
-     * of specifying them under parameters section in config/services.yaml file.
-     *
-     * See https://symfony.com/doc/current/best_practices/configuration.html#constants-vs-configuration-options
      */
     public const NUM_ITEMS = 10;
 
@@ -291,6 +277,19 @@ class Post
             ];
         }
 
+        $comments = [];
+        foreach ($this->comments as $comment){
+            $comments[] = [
+                "id" => $comment->getId(),
+                'author'        => [
+                    "id"        => $comment->getAuthor()->getId(),
+                    "name"  => $comment->getAuthor()->getFullName(),
+                ],
+                'content' => $comment->getContent(),
+                'publisheAt' => $comment->getPublishedAt()
+            ];
+        }
+
         return [
             "id"            => $this->id,
             "title"         => $this->title,
@@ -303,7 +302,8 @@ class Post
                 "id"        => $this->author->getId(),
                 "name"  => $this->author->getFullName(),
             ],
-            "categories" => $categories
+            "categories" => $categories,
+            "comments" => $comments
         ];
     }
 
@@ -314,15 +314,16 @@ class Post
 
         $this->setImage($data["image"]);
 
-        foreach ($data["tags"] as $tag)
-        {
-            $t = new Tag();
-            if($tag['id'] && $tag['id'] != "") { $t->setId((int)$tag['id']); }
-            $t->setName($tag['name']);
+//        foreach ($data["tags"] as $tag)
+//        {
+//            $t = new Tag();
+//            if($tag['id'] && $tag['id'] != "") { $t->setId((int)$tag['id']); }
+//            $t->setName($tag['name']);
+//
+//            $this->addTag($t);
+//        }
 
-            $this->addTag($t);
-        }
-
+        // the date update automatic
 //        $date = $data["publishedAt"];
 //        // Get the timestamp as the TS tring / 1000
 //        $ts = (int) $date[1];

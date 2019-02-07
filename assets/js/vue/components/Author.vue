@@ -14,7 +14,8 @@
     import avatar from './../../img/user-avatar.jpeg'
     export default {
         props:[
-            "author"
+            "author",
+            "jusst"
         ],
         methods:{
             getAuthorPage(id){

@@ -43,6 +43,8 @@
                     <span class="mt-5 d-block" v-text="post.content"></span>
                 </v-container>
             </v-card>
+
+            <comments :comments="post.comments"></comments>
         </v-flex>
 
         <v-btn @click="xxxx">xx</v-btn>
@@ -53,12 +55,14 @@
 <script>
     import Loading from '../../components/Loading'
     import Author from "../../components/Author";
+    import Comments from "../../components/Comments";
 
     export default {
         name: 'Details',
         components: {
             Loading,
-            Author
+            Author,
+            Comments
         },
         data() {
             return {
