@@ -1,4 +1,5 @@
 var Encore = require('@symfony/webpack-encore');
+var ImageminPlugin = require('imagemin-webpack-plugin').default
 
 Encore
     .setOutputPath('public/build/')
@@ -25,6 +26,17 @@ Encore
         "vue-awesome-notifications/dist/styles/style.css",
         './assets/scss/app.scss'
     ])
+    .addPlugin(
+        new ImageminPlugin({
+            disable: process.env.NODE_ENV === 'production', // Disable during development
+            pngquant: {
+                quality: '95-100'
+            },
+            optipng: {
+                optimizationLevel: 9
+            }
+        })
+    )
 
     // .addEntry('js/login', './assets/js/login.js')
     // .addEntry('js/admin', './assets/js/admin.js')

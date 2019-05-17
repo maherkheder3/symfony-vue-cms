@@ -1,8 +1,8 @@
 {
-  "build/css/app.css": "http://localhost:8081/build/css/app.css",
-  "build/js/app.css": "http://localhost:8081/build/js/app.css",
-  "build/js/app.js": "http://localhost:8081/build/js/app.js",
-  "build/images/default-avatar-big.jpg": "http://localhost:8081/build/images/default-avatar-big.ea1b6284.jpg",
-  "build/images/default-image.png": "http://localhost:8081/build/images/default-image.60b07355.png",
-  "build/images/user-avatar.jpeg": "http://localhost:8081/build/images/user-avatar.52587ab3.jpeg"
+  "build/css/app.css": "/build/css/app.css",
+  "build/js/app.css": "/build/js/app.css",
+  "build/js/app.js": "/build/js/app.js",
+  "build/images/default-avatar-big.jpg": "/build/images/default-avatar-big.ea1b6284.jpg",
+  "build/images/default-image.png": "/build/images/default-image.60b07355.png",
+  "build/images/user-avatar.jpeg": "/build/images/user-avatar.52587ab3.jpeg"
 }
