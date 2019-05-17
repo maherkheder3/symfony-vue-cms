@@ -33,7 +33,7 @@
     "dev-server": "./node_modules/.bin/encore dev-server",
     "dev": "./node_modules/.bin/encore dev",
     "watch": "./node_modules/.bin/encore dev --watch",
-    "build": "./node_modules/.bin/encore production",
+    "build": "./node_modules/.bin/encore production ",
     "hot": "./node_modules/.bin/encore dev-server --http --port 8081 --hot"
   },
   "dependencies": {
@@ -42,6 +42,7 @@
     "bootstrap-vue": "^2.0.0-rc.11",
     "material-design-icons-iconfont": "^4.0.4",
     "swiper": "^4.4.6",
+    "url-loader": "^1.1.2",
     "vee-validate": "^2.1.5",
     "vue-awesome-notifications": "^2.2.9",
     "vuelidate": "^0.7.4",

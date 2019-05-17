@@ -22,6 +22,7 @@ import router from './vue/router/index';
 import App from './vue/App';
 import store from './vue/store'; // -> index.js
 
+Vue.config.productionTip = false;
 
 new Vue({
     template: '<App/>',
@@ -29,4 +30,5 @@ new Vue({
     router,
     store,
 }).$mount('#app');
+
 
