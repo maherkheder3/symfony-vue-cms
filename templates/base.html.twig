@@ -12,6 +12,7 @@
         <link rel="alternate" type="application/rss+xml" title="{{ 'rss.title'|trans }}" href="{{ path('blog_rss') }}">
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="manifest" href="{{ asset('build/manifest.eb542dd5edd7b1fa7698e5c7919aeaea.json') }}"></link>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
         {% endblock %}
@@ -149,10 +150,19 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
         {% block javascripts %}
-            {#<script src="{{ asset('build/manifest.js') }}"></script>#}
             {#<script src="{{ asset('build/js/common.js') }}"></script>#}
             <script src="{{ asset('build/js/app.js') }}"></script>
         {% endblock %}
+
+{#        <script>#}
+{#            // Check that service workers are registered#}
+{#            if ('serviceWorker' in navigator) {#}
+{#                // Use the window load event to keep the page load performant#}
+{#                window.addEventListener('load', () => {#}
+{#                    navigator.serviceWorker.register('{{ asset('build/service-worker.js') }}');#}
+{#                });#}
+{#            }#}
+{#        </script>#}
 
         {# it's not mandatory to set the timezone in localizeddate(). This is done to
            avoid errors when the 'intl' PHP extension is not available and the application

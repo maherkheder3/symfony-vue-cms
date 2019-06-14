@@ -6,7 +6,7 @@
   "author": "maher <maherkheder3@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.22.4",
+    "@symfony/webpack-encore": "^0.27.0",
     "axios": "^0.18.0",
     "bloodhound-js": "^1.2.1",
     "bootstrap-sass": "^3.3.7",
@@ -27,19 +27,23 @@
     "vue-router": "^3.0.2",
     "vue-template-compiler": "^2.5.22",
     "vuex": "^3.1.0",
-    "webpack-notifier": "^1.6.0"
+    "webpack-notifier": "^1.6.0",
+    "webpack-pwa-manifest": "^4.0.0",
+    "workbox-webpack-plugin": "^4.3.1"
   },
   "scripts": {
     "dev-server": "./node_modules/.bin/encore dev-server",
     "dev": "./node_modules/.bin/encore dev",
     "watch": "./node_modules/.bin/encore dev --watch",
-    "build": "./node_modules/.bin/encore production ",
+    "prod": "./node_modules/.bin/encore production ",
     "hot": "./node_modules/.bin/encore dev-server --http --port 8081 --hot"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.13",
     "babel-polyfill": "^6.26.0",
     "bootstrap-vue": "^2.0.0-rc.11",
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
     "imagemin-webpack-plugin": "^2.4.2",
     "material-design-icons-iconfont": "^4.0.4",
     "swiper": "^4.4.6",

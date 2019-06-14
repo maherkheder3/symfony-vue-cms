@@ -5,5 +5,8 @@
   "build/images/default-avatar-big.jpg": "/build/images/default-avatar-big.ea1b6284.jpg",
   "build/images/default-image.png": "/build/images/default-image.60b07355.png",
   "build/images/file.svg": "/build/images/file.0c42c1ee.svg",
-  "build/images/user-avatar.jpeg": "/build/images/user-avatar.52587ab3.jpeg"
+  "build/images/user-avatar.jpeg": "/build/images/user-avatar.52587ab3.jpeg",
+  "build/manifest.95f4fc7dce64f377da968145d2f424c5.json": "/build/manifest.95f4fc7dce64f377da968145d2f424c5.json",
+  "build/precache-manifest.b88b3d9de2db43d045c680b523aa6099.js": "/build/precache-manifest.b88b3d9de2db43d045c680b523aa6099.js",
+  "build/service-worker.js": "/build/service-worker.js"
 }
